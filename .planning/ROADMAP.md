@@ -31,12 +31,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Running the parse script against YourLibrary.json produces a count of liked tracks with Spotify IDs extracted
   4. A live test call to the Spotify audio features endpoint with actual app credentials returns either data (endpoint available) or a documented 403 result (graceful degradation path chosen)
   5. All API keys load from `.env` and no secrets appear in any committed file
-**Plans**: TBD
+**Plans:** 3 plans
 
 Plans:
-- [ ] 01-01: Docker Compose setup matching HealthMap patterns (PostgreSQL, Redis, FastAPI, Next.js services)
-- [ ] 01-02: Database schema and migrations (all tables, pg_trgm extension, countries seed data)
-- [ ] 01-03: Spotify export parser and audio features endpoint validation
+- [ ] 01-01-PLAN.md — Docker Compose environment, Dockerfiles, FastAPI skeleton with async SQLAlchemy and pydantic-settings
+- [ ] 01-02-PLAN.md — Database schema via Alembic async migration (all tables, pg_trgm, indexes) and countries seed script
+- [ ] 01-03-PLAN.md — Spotify export parser module and audio features endpoint validation script
 
 ### Phase 2: Data Enrichment Pipeline
 **Goal**: All 3,022 artists have origin countries resolved (or explicitly marked unresolvable), all tracks have audio features (or nullable columns if endpoint unavailable), and the pipeline is safe to re-run without creating duplicates or losing progress after interruption.
@@ -125,7 +125,7 @@ Plans:
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
