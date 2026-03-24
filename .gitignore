@@ -39,3 +39,6 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+
+# Pipeline generated files
+pipeline/.audio_features_available
