@@ -34,7 +34,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans:** 3 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Docker Compose environment, Dockerfiles, FastAPI skeleton with async SQLAlchemy and pydantic-settings
+- [x] 01-01-PLAN.md — Docker Compose environment, Dockerfiles, FastAPI skeleton with async SQLAlchemy and pydantic-settings
 - [ ] 01-02-PLAN.md — Database schema via Alembic async migration (all tables, pg_trgm, indexes) and countries seed script
 - [ ] 01-03-PLAN.md — Spotify export parser module and audio features endpoint validation script
 
