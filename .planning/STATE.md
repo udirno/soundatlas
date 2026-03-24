@@ -9,28 +9,28 @@ See: .planning/PROJECT.md (updated 2026-03-24)
 
 ## Current Position
 
-Phase: 1 of 6 (Infrastructure and Pipeline Foundation)
-Plan: 2 of 3 in current phase
-Status: In progress
-Last activity: 2026-03-24 — Completed 01-02-PLAN.md (Alembic migrations + DB schema + countries seed)
+Phase: 1 of 6 (Infrastructure and Pipeline Foundation) — COMPLETE
+Plan: 3 of 3 in phase 1 (phase complete)
+Status: Phase 1 complete — ready for Phase 2
+Last activity: 2026-03-24 — Completed 01-03-PLAN.md (Spotify export parser + audio features validation)
 
-Progress: [██░░░░░░░░] 12%
+Progress: [███░░░░░░░] 18%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 2
-- Average duration: 19 min
-- Total execution time: 0.6 hours
+- Total plans completed: 3
+- Average duration: 20 min
+- Total execution time: ~1 hour
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01-infrastructure | 2/3 | 37min | 19min |
+| 01-infrastructure | 3/3 | ~60min | 20min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (30min), 01-02 (7min)
+- Last 5 plans: 01-01 (30min), 01-02 (7min), 01-03 (25min)
 - Trend: on track
 
 *Updated after each plan completion*
@@ -52,6 +52,8 @@ Recent decisions affecting current work:
 - [Phase 1]: Verify Spotify audio features endpoint access with live API call BEFORE writing any enrichment code — endpoint was restricted Nov 2024 for new app registrations; design pipeline with nullable audio feature columns regardless of result
 - [Phase 2]: Use `mb_resolution_status` column (pending/resolved/not_found/skipped) on artists table — pipeline always queries `WHERE mb_resolution_status = 'pending'`; commit each artist row individually to enable checkpoint/resume
 - [Phase 4]: Use GeoJSON source + circle layer (WebGL-rendered) for map markers — never use `new mapboxgl.Marker()` for dataset-scale points (kills performance at 3,022 artists)
+- [01-03]: YourLibrary.json uses flat field names `artist`, `album`, `track`, `uri` — not the `artistName`/`trackName` variants noted in pre-plan research
+- [01-03]: Audio features endpoint validation writes flag file at `pipeline/.audio_features_available` — Phase 2 reads this before attempting batch fetch; 403 is handled as a valid/expected outcome
 
 ### Pending Todos
 
@@ -66,5 +68,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-03-24
-Stopped at: 01-02-PLAN.md complete — ready for 01-03 (pipeline scripts: Spotify library import)
-Resume file: .planning/phases/01-infrastructure-and-pipeline-foundation/01-03-PLAN.md
+Stopped at: Phase 1 complete — ready for Phase 2 (Data Enrichment Pipeline)
+Resume file: .planning/phases/02-data-enrichment-pipeline/02-01-PLAN.md

@@ -12,7 +12,7 @@ SoundAtlas ships as a data-first project: an offline pipeline seeds PostgreSQL w
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Infrastructure and Pipeline Foundation** - Docker Compose environment, database schema, and Spotify export parsing with audio features validation
+- [x] **Phase 1: Infrastructure and Pipeline Foundation** - Docker Compose environment, database schema, and Spotify export parsing with audio features validation (completed 2026-03-24)
 - [ ] **Phase 2: Data Enrichment Pipeline** - Spotify API enrichment, MusicBrainz origin country resolution with checkpoint/resume, and full PostgreSQL seeding
 - [ ] **Phase 3: Backend API** - FastAPI REST endpoints for countries, artists, search, and analytics
 - [ ] **Phase 4: Map View and Country Detail** - Mapbox GL JS world map with GeoJSON circle layer and country drill-down panel
@@ -35,8 +35,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 Plans:
 - [x] 01-01-PLAN.md — Docker Compose environment, Dockerfiles, FastAPI skeleton with async SQLAlchemy and pydantic-settings
-- [ ] 01-02-PLAN.md — Database schema via Alembic async migration (all tables, pg_trgm, indexes) and countries seed script
-- [ ] 01-03-PLAN.md — Spotify export parser module and audio features endpoint validation script
+- [x] 01-02-PLAN.md — Database schema via Alembic async migration (all tables, pg_trgm, indexes) and countries seed script
+- [x] 01-03-PLAN.md — Spotify export parser module and audio features endpoint validation script
 
 ### Phase 2: Data Enrichment Pipeline
 **Goal**: All 3,022 artists have origin countries resolved (or explicitly marked unresolvable), all tracks have audio features (or nullable columns if endpoint unavailable), and the pipeline is safe to re-run without creating duplicates or losing progress after interruption.
@@ -129,7 +129,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Infrastructure and Pipeline Foundation | 0/3 | Not started | - |
+| 1. Infrastructure and Pipeline Foundation | 3/3 | Complete | 2026-03-24 |
 | 2. Data Enrichment Pipeline | 0/3 | Not started | - |
 | 3. Backend API | 0/4 | Not started | - |
 | 4. Map View and Country Detail | 0/3 | Not started | - |
