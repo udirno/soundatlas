@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wc -l .planning/codebase/*.md)",
+      "Bash(grep -E '\\(sk-[a-zA-Z0-9]{20,}|sk_live_[a-zA-Z0-9]+|sk_test_[a-zA-Z0-9]+|ghp_[a-zA-Z0-9]{36}|gho_[a-zA-Z0-9]{36}|glpat-[a-zA-Z0-9_-]+|AKIA[A-Z0-9]{16}|xox[baprs]-[a-zA-Z0-9-]+|-----BEGIN.*PRIVATE KEY|eyJ[a-zA-Z0-9_-]+\\\\.eyJ[a-zA-Z0-9_-]+\\\\.\\)' .planning/codebase/*.md)",
+      "Bash(node:*)",
+      "Bash(python3:*)",
+      "WebSearch",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(docker ps:*)",
+      "Bash(docker exec:*)",
+      "Bash(curl -s http://localhost:8000/api/countries/235)",
+      "Bash(curl -s http://localhost:8000/api/countries/235/comparison)",
+      "Bash(curl -s \"http://localhost:8000/api/artists?q=radio\")",
+      "Bash(curl -s \"http://localhost:8000/api/artists\")",
+      "Bash(curl -s \"http://localhost:8000/api/search?q=radioheed\")",
+      "Bash(curl -s \"http://localhost:8000/api/search?q=\")",
+      "Bash(curl -s http://localhost:8000/api/analytics/dashboard)",
+      "Bash(curl -s \"http://localhost:8000/api/analytics/genres\")",
+      "Bash(curl -s \"http://localhost:8000/api/analytics/genres?country_id=235\")",
+      "Bash(curl -s -X POST http://localhost:8000/api/ai/ask -H 'Content-Type: application/json' -d '{\"\"\"\"question\"\"\"\":\"\"\"\"What is my top genre?\"\"\"\"}')",
+      "Bash(curl -s http://localhost:8000/api/ai/suggestions)",
+      "Bash(curl -s http://localhost:8000/)",
+      "Bash(curl -s http://localhost:8000/health)",
+      "Skill(gsd:execute-phase)",
+      "Bash(docker compose:*)",
+      "Bash(docker run:*)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(curl -s http://localhost:8000/api/countries)",
+      "Bash(curl:*)",
+      "Bash(echo \"EXIT: $?\")"
+    ]
+  }
+}
