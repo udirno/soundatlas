@@ -86,7 +86,7 @@ Plans:
 **Plans:** 3 plans
 
 Plans:
-- [ ] 04-01-PLAN.md — Install mapbox-gl/recharts, create typed API client and color palette, build MapView with GeoJSON circle layer
+- [x] 04-01-PLAN.md — Install mapbox-gl/recharts, create typed API client and color palette, build MapView with GeoJSON circle layer
 - [ ] 04-02-PLAN.md — Hover tooltips, click-to-fly, CountryPanel shell with data fetching
 - [ ] 04-03-PLAN.md — Artist list, genre pie chart, audio feature radar chart, top tracks in CountryPanel
 
@@ -132,6 +132,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 | 1. Infrastructure and Pipeline Foundation | 3/3 | Complete | 2026-03-24 |
 | 2. Data Enrichment Pipeline | 3/3 | Complete | 2026-03-25 |
 | 3. Backend API | 4/4 | Complete | 2026-03-24 |
-| 4. Map View and Country Detail | 0/3 | Not started | - |
+| 4. Map View and Country Detail | 1/3 | In progress | - |
 | 5. Global Stats and Search | 0/2 | Not started | - |
 | 6. AI Chat | 0/2 | Not started | - |

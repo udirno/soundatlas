@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-03-24)
 
 **Core value:** Interactive world map that instantly reveals the geographic diversity of a music library — every artist mapped to their origin country
-**Current focus:** Phase 3 - Backend API
+**Current focus:** Phase 4 - Map View and Country Detail
 
 ## Current Position
 
-Phase: 3 of 6 (Backend API) — COMPLETE
-Plan: 4 of 4 in phase 3
-Status: Phase 3 complete — ready to begin Phase 4 (Map View and Country Detail)
-Last activity: 2026-03-24 — Completed phase 3 (all 4 plans: schemas, endpoints, search, analytics)
+Phase: 4 of 6 (Map View and Country Detail) — In progress
+Plan: 1 of 3 in phase 4 — COMPLETE
+Status: Phase 4 Plan 01 complete — ready for Plan 02 (Country Detail Panel)
+Last activity: 2026-03-24 — Completed 04-01 (Mapbox map foundation + backend schema extensions)
 
-Progress: [██████░░░░] 50%
+Progress: [████████░░] 57% (8/14 plans complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 7
+- Total plans completed: 8
 - Average duration: ~15 min
-- Total execution time: ~1 hour 40 min
+- Total execution time: ~1 hour 58 min
 
 **By Phase:**
 
@@ -30,9 +30,10 @@ Progress: [██████░░░░] 50%
 | 01-infrastructure | 3/3 | ~60min | 20min |
 | 02-data-enrichment | 3/3 | ~103min | 34min |
 | 03-backend-api | 4/4 | ~26min | ~6min |
+| 04-map-view | 1/3 | ~18min | ~18min |
 
 **Recent Trend:**
-- Last 5 plans: 02-02 (70min), 02-03 (3min), 03-01 (<5min), 03-03 (<5min), 03-04 (2min)
+- Last 5 plans: 02-03 (3min), 03-01 (<5min), 03-03 (<5min), 03-04 (2min), 04-01 (~18min)
 - Trend: on track
 
 *Updated after each plan completion*
@@ -77,19 +78,28 @@ Recent decisions affecting current work:
 - [03-04]: Genre distribution uses raw SQL text() unnest — no SQLAlchemy ORM equivalent for PostgreSQL ARRAY unnest; text().bindparams() used for safe parameterization
 - [03-04]: Audio feature averages return None fields gracefully — tracks table has no audio data (Spotify endpoint restricted Nov 2024); frontend must handle null feature values
 - [03-04]: AI routes have no db dependency in Phase 3 — Phase 6 will add RAG logic; schema contract established now so frontend can code against it
+- [04-01]: GeoJSON circle layer used for all map markers — no mapboxgl.Marker() anywhere in source code; WebGL-rendered for performance at dataset scale
+- [04-01]: Map instance stored in useRef, never useState — prevents re-render loops in React
+- [04-01]: buildCircleColorExpression() built programmatically from GENRE_COLORS — adding a genre to colors.ts automatically updates the Mapbox layer
+- [04-01]: page.tsx wraps fetchCountries in try/catch — map renders with empty array on build-time or backend-offline scenarios
+- [04-01]: seed_countries.py uses ON CONFLICT DO UPDATE SET region=EXCLUDED.region — re-runs populate region for existing rows
+- [04-01]: Alembic migration 002 must be run inside Docker: `docker compose exec backend alembic upgrade head`
 
 ### Pending Todos
 
-None.
+- Apply Alembic migration 002: `docker compose exec backend alembic upgrade head`
+- Re-run seed_countries.py inside Docker to populate region column for existing rows
+- Set `NEXT_PUBLIC_MAPBOX_TOKEN` in `frontend/.env.local` (see USER-SETUP.md)
 
 ### Blockers/Concerns
 
 - [Phase 4]: Audio feature charts will show null/empty data — Spotify audio features endpoint was restricted for new app registrations. Frontend should handle gracefully with "data unavailable" state.
+- [Phase 4]: Alembic migration 002 and seed_countries re-run must happen before region data is available in the database. Map will still render without region data (it's nullable/optional).
 - [Phase 2]: MusicBrainz disambiguation accuracy on actual 3,022 artist dataset is untested. Budget time in Phase 2 for a manual audit of the first 200 resolved artists before running the full pipeline.
 - [Infrastructure]: Local PostgreSQL running on port 5432 conflicts with Docker-mapped port. All pipeline scripts connecting to the database must use Docker networking (`--network soundatlas_soundatlas_network`). This affects every plan in Phase 2 that runs pipeline scripts from host.
 
 ## Session Continuity
 
 Last session: 2026-03-24
-Stopped at: Phase 3 COMPLETE (all 4 plans done) — ready to begin Phase 4 (Map View and Country Detail)
-Resume file: .planning/phases/04-map-view/ (when created)
+Stopped at: Phase 4 Plan 01 COMPLETE — ready to begin Phase 4 Plan 02 (Country Detail Panel)
+Resume file: .planning/phases/04-map-view-and-country-detail/04-02-PLAN.md
