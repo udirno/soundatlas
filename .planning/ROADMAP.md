@@ -116,11 +116,11 @@ Plans:
   3. Asking a natural language question about the library returns an accurate answer grounded in actual listening data (top countries, genre distributions, audio feature patterns)
   4. Asking the same question twice returns a response from Redis cache (no second Claude API call)
   5. Every query and response is recorded in the ai_query_log table with model name, token count, and response time
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 06-01: AI chat backend — RAG context builder, Claude API integration, Redis caching, and ai_query_log table writes (POST /api/ai/ask, GET /api/ai/suggestions)
-- [ ] 06-02: AI chat frontend panel — toggle open/close, suggestion chips, conversation history, streaming or batch response display
+- [ ] 06-01-PLAN.md — AI chat backend: Redis client, AIService with Claude API + RAG context + caching + query logging
+- [ ] 06-02-PLAN.md — AI chat frontend: AIChatPanel component with toggle, suggestion chips, conversation, wired to HomeClient
 
 ## Progress
 
