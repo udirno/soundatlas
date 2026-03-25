@@ -182,7 +182,7 @@ export default function CountryPanel({ countryId, onClose }: CountryPanelProps) 
 
                 return (
                   <>
-                    <div className={showAllArtists ? 'overflow-y-auto max-h-64' : ''}>
+                    <div className={showAllArtists ? 'overflow-y-auto max-h-96' : ''}>
                       {displayArtists.map((artist) => (
                         <ArtistRow key={artist.id} artist={artist} />
                       ))}
