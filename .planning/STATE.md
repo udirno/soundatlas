@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-03-24)
 
 **Core value:** Interactive world map that instantly reveals the geographic diversity of a music library — every artist mapped to their origin country
-**Current focus:** Phase 4 - Map View and Country Detail
+**Current focus:** Phase 4 COMPLETE — ready for Phase 5
 
 ## Current Position
 
-Phase: 4 of 6 (Map View and Country Detail) — In progress
-Plan: 2 of 3 in phase 4 — COMPLETE
-Status: Phase 4 Plan 02 complete — ready for Plan 03 (CountryPanel artist list, genre chart, audio features)
-Last activity: 2026-03-25 — Completed 04-02 (hover tooltips, click-to-fly, CountryPanel shell, HomeClient)
+Phase: 4 of 6 (Map View and Country Detail) — COMPLETE
+Plan: 3 of 3 in phase 4 — COMPLETE
+Status: Phase 4 complete — all 3 plans executed, human-verified. Ready for Phase 5 (Global Stats and Search)
+Last activity: 2026-03-25 — Completed 04-03 (GenrePieChart, AudioFeatureChart, CountryPanel content, Docker/tooltip fixes)
 
-Progress: [█████████░] 64% (9/14 plans complete)
+Progress: [███████░░░] 71% (10/14 plans complete)
 
 ## Performance Metrics
 
@@ -30,10 +30,10 @@ Progress: [█████████░] 64% (9/14 plans complete)
 | 01-infrastructure | 3/3 | ~60min | 20min |
 | 02-data-enrichment | 3/3 | ~103min | 34min |
 | 03-backend-api | 4/4 | ~26min | ~6min |
-| 04-map-view | 2/3 | ~21min | ~10min |
+| 04-map-view | 3/3 | ~36min | ~12min |
 
 **Recent Trend:**
-- Last 5 plans: 03-01 (<5min), 03-03 (<5min), 03-04 (2min), 04-01 (~18min), 04-02 (~3min)
+- Last 5 plans: 03-04 (2min), 04-01 (~18min), 04-02 (~3min), 04-03 (~15min)
 - Trend: on track
 
 *Updated after each plan completion*
@@ -87,12 +87,15 @@ Recent decisions affecting current work:
 - [04-02]: Access Mapbox GeoJSONFeature.properties via direct `as CountryFeatureProperties` cast — direct Feature<Point, T> cast fails TypeScript due to GeoJsonProperties type; properties-only cast is the idiomatic workaround
 - [04-02]: dynamic(..., { ssr: false }) must be in a client component — moved from page.tsx (server) to HomeClient.tsx (client)
 - [04-02]: CountryPanel fetches its own data (decoupled) — MapView only emits countryId via onCountrySelect; panel runs useEffect on countryId dep
+- [04-03]: Pre-compute genre_color in GeoJSON properties using getGenreColor() fuzzy includes match — Mapbox match expression requires exact string equality which fails on sub-genres like "dark r&b"
+- [04-03]: Exclude tempo from AudioFeatureChart radar — BPM scale (60-200) distorts vs 0-1 normalized features (energy, danceability, valence, acousticness)
+- [04-03]: API_URL (non-NEXT_PUBLIC) env var for server-side Docker routing via typeof window check — NEXT_PUBLIC_API_URL is for client-side browser requests
+- [04-03]: frontend/.dockerignore must exclude node_modules — without it, COPY . . overwrites container's npm install with host's (potentially stale) node_modules
+- [04-03]: Tooltip CSS needs !important to override Tailwind @tailwind base reset which sets background-color: white on all elements
 
 ### Pending Todos
 
-- Apply Alembic migration 002: `docker compose exec backend alembic upgrade head`
-- Re-run seed_countries.py inside Docker to populate region column for existing rows
-- Set `NEXT_PUBLIC_MAPBOX_TOKEN` in `frontend/.env.local` (see USER-SETUP.md)
+None.
 
 ### Blockers/Concerns
 
@@ -104,5 +107,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-03-25
-Stopped at: Phase 4 Plan 02 COMPLETE — ready to begin Phase 4 Plan 03 (CountryPanel full content: artist list, genre chart, audio features, top tracks)
-Resume file: .planning/phases/04-map-view-and-country-detail/04-03-PLAN.md
+Stopped at: Phase 4 COMPLETE — all 3 plans done, human-verified. Ready for Phase 5 (Global Stats and Search)
+Resume file: .planning/phases/05-global-stats-and-search/ (when created)

@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Infrastructure and Pipeline Foundation** - Docker Compose environment, database schema, and Spotify export parsing with audio features validation (completed 2026-03-24)
 - [x] **Phase 2: Data Enrichment Pipeline** - Spotify API enrichment, MusicBrainz origin country resolution with checkpoint/resume, and full PostgreSQL seeding (completed 2026-03-25)
 - [x] **Phase 3: Backend API** - FastAPI REST endpoints for countries, artists, search, and analytics (completed 2026-03-24)
-- [ ] **Phase 4: Map View and Country Detail** - Mapbox GL JS world map with GeoJSON circle layer and country drill-down panel
+- [x] **Phase 4: Map View and Country Detail** - Mapbox GL JS world map with GeoJSON circle layer and country drill-down panel (completed 2026-03-25)
 - [ ] **Phase 5: Global Stats and Search** - Sidebar analytics dashboard, diversity score, and pg_trgm fuzzy search with map navigation
 - [ ] **Phase 6: AI Chat** - Claude-powered natural language chat panel with RAG context, Redis caching, and query logging
 
@@ -88,7 +88,7 @@ Plans:
 Plans:
 - [x] 04-01-PLAN.md — Install mapbox-gl/recharts, create typed API client and color palette, build MapView with GeoJSON circle layer
 - [x] 04-02-PLAN.md — Hover tooltips, click-to-fly, CountryPanel shell with data fetching
-- [ ] 04-03-PLAN.md — Artist list, genre pie chart, audio feature radar chart, top tracks in CountryPanel
+- [x] 04-03-PLAN.md — Artist list, genre pie chart, audio feature radar chart, top tracks in CountryPanel
 
 ### Phase 5: Global Stats and Search
 **Goal**: A sidebar shows global library analytics including the diversity score and top countries, and searching for an artist or track by name navigates the map to their origin country and opens the detail panel.
@@ -132,6 +132,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 | 1. Infrastructure and Pipeline Foundation | 3/3 | Complete | 2026-03-24 |
 | 2. Data Enrichment Pipeline | 3/3 | Complete | 2026-03-25 |
 | 3. Backend API | 4/4 | Complete | 2026-03-24 |
-| 4. Map View and Country Detail | 2/3 | In progress | - |
+| 4. Map View and Country Detail | 3/3 | Complete | 2026-03-25 |
 | 5. Global Stats and Search | 0/2 | Not started | - |
 | 6. AI Chat | 0/2 | Not started | - |
