@@ -1,4 +1,13 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000';
+// Server-side (Node.js in Docker): use internal Docker service name
+// Client-side (browser): use localhost
+function getBaseUrl(): string {
+  if (typeof window === 'undefined') {
+    // Server-side: prefer internal Docker URL, fall back to localhost
+    return process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000';
+  }
+  // Client-side: always use the public URL
+  return process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000';
+}
 
 export interface ArtistListItem {
   id: number;
@@ -57,7 +66,7 @@ export interface CountryComparison {
 }
 
 export async function fetchCountries(): Promise<CountryListItem[]> {
-  const res = await fetch(`${BASE_URL}/api/countries`, { cache: 'no-store' });
+  const res = await fetch(`${getBaseUrl()}/api/countries`, { cache: 'no-store' });
   if (!res.ok) {
     throw new Error(`Failed to fetch countries: ${res.status} ${res.statusText}`);
   }
@@ -65,7 +74,7 @@ export async function fetchCountries(): Promise<CountryListItem[]> {
 }
 
 export async function fetchCountryDetail(id: number): Promise<CountryDetail> {
-  const res = await fetch(`${BASE_URL}/api/countries/${id}`, { cache: 'no-store' });
+  const res = await fetch(`${getBaseUrl()}/api/countries/${id}`, { cache: 'no-store' });
   if (!res.ok) {
     throw new Error(`Failed to fetch country detail for id ${id}: ${res.status} ${res.statusText}`);
   }
@@ -73,7 +82,7 @@ export async function fetchCountryDetail(id: number): Promise<CountryDetail> {
 }
 
 export async function fetchCountryComparison(id: number): Promise<CountryComparison> {
-  const res = await fetch(`${BASE_URL}/api/countries/${id}/comparison`, { cache: 'no-store' });
+  const res = await fetch(`${getBaseUrl()}/api/countries/${id}/comparison`, { cache: 'no-store' });
   if (!res.ok) {
     throw new Error(`Failed to fetch country comparison for id ${id}: ${res.status} ${res.statusText}`);
   }
