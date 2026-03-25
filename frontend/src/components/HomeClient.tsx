@@ -4,6 +4,7 @@ import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import type { CountryListItem } from '@/lib/api';
 import CountryPanel from './CountryPanel';
+import StatsSidebar from './StatsSidebar';
 
 // Dynamic import with ssr:false must be in a client component context
 const MapView = dynamic(() => import('@/components/MapView'), {
@@ -20,6 +21,7 @@ export default function HomeClient({ countries }: HomeClientProps) {
 
   return (
     <main className="w-full h-screen">
+      <StatsSidebar onCountrySelect={setSelectedCountryId} />
       <MapView countries={countries} onCountrySelect={setSelectedCountryId} />
       {selectedCountryId !== null && (
         <CountryPanel

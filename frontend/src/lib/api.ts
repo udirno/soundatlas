@@ -88,3 +88,54 @@ export async function fetchCountryComparison(id: number): Promise<CountryCompari
   }
   return res.json() as Promise<CountryComparison>;
 }
+
+export interface DashboardStats {
+  country_count: number;
+  artist_count: number;
+  track_count: number;
+  diversity_score: number;
+  top_genres: Array<{ genre: string; count: number }>;
+  top_countries: Array<{ id: number; name: string; iso_alpha2: string; artist_count: number }>;
+}
+
+export interface SearchArtistHit {
+  id: number;
+  name: string;
+  spotify_id: string | null;
+  genres: string[] | null;
+  image_url: string | null;
+  score: number;
+  country_id: number | null;
+}
+
+export interface SearchTrackHit {
+  id: number;
+  name: string;
+  spotify_id: string | null;
+  album_name: string | null;
+  score: number;
+  in_library: boolean;
+  country_id: number | null;
+}
+
+export interface SearchResult {
+  query: string;
+  artists: SearchArtistHit[];
+  tracks: SearchTrackHit[];
+}
+
+export async function fetchDashboard(): Promise<DashboardStats> {
+  const res = await fetch(`${getBaseUrl()}/api/analytics/dashboard`, { cache: 'no-store' });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch dashboard stats: ${res.status} ${res.statusText}`);
+  }
+  return res.json() as Promise<DashboardStats>;
+}
+
+export async function fetchSearch(q: string): Promise<SearchResult> {
+  const res = await fetch(`${getBaseUrl()}/api/search?q=${encodeURIComponent(q)}`, { cache: 'no-store' });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch search results: ${res.status} ${res.statusText}`);
+  }
+  return res.json() as Promise<SearchResult>;
+}
