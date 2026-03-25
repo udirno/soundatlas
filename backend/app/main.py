@@ -26,6 +26,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from app.api.routes import countries, artists, search, analytics, ai  # noqa: E402
+
+app.include_router(countries.router)
+app.include_router(artists.router)
+app.include_router(search.router)
+app.include_router(analytics.router)
+app.include_router(ai.router)
+
 
 @app.get("/")
 async def root():
