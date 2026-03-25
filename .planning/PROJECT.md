@@ -2,7 +2,9 @@
 
 ## What This Is
 
-A personal music intelligence platform that maps Spotify listening data geographically. Users visit the site and immediately see an interactive world map showing where the music in the library originates — every artist pinned to their country of origin, with rich analytics, audio feature breakdowns, and an AI chat interface for natural language exploration of listening patterns.
+A personal music intelligence platform that maps a Spotify library geographically. Visitors see an interactive world map showing where every artist in the library originates — each artist pinned to their country of origin, with circle markers sized by track count and colored by dominant genre. Clicking any country opens a detail panel with artist lists, genre pie charts, audio feature comparisons, and top tracks. A global analytics sidebar shows diversity score, top countries, and genre distribution. A search bar with fuzzy autocomplete navigates the map by artist or track name. A Claude-powered AI chat panel answers natural language questions about listening patterns using RAG context from PostgreSQL.
+
+The app ships pre-loaded with data from a personal Spotify export (9,115 tracks, 3,022 artists, 3,022 origin countries resolved). No login required — visitors see the map immediately.
 
 ## Core Value
 
@@ -12,18 +14,17 @@ The interactive world map that instantly reveals the geographic diversity of a m
 
 ### Validated
 
-(None yet — ship to validate)
+- [x] Interactive Mapbox world map with country markers sized by track count and colored by dominant genre — v1.0
+- [x] Country detail panel with artist list, genre breakdown, audio feature comparison, and top tracks — v1.0
+- [x] AI chat panel using Claude API with RAG context from PostgreSQL listening data — v1.0
+- [x] Data pipeline seeding from Spotify data export + API enrichment (audio features, artist metadata, MusicBrainz origin countries) — v1.0
+- [x] Fuzzy search across artists and tracks using pg_trgm — v1.0
+- [x] Global analytics dashboard (diversity score, top countries, genre distribution) — v1.0
+- [x] Docker Compose local development matching HealthMap patterns — v1.0
 
 ### Active
 
-- [ ] Interactive Mapbox world map with country markers sized by track count and colored by dominant genre
-- [ ] Country detail panel with artist list, genre breakdown, audio feature comparison, and top tracks
-- [ ] AI chat panel using Claude API with RAG context from PostgreSQL listening data
-- [ ] Data pipeline seeding from Spotify data export + API enrichment (audio features, artist metadata, MusicBrainz origin countries)
-- [ ] Fuzzy search across artists and tracks using pg_trgm
-- [ ] Global analytics dashboard (diversity score, top countries, genre distribution)
-- [ ] Manual re-sync capability to update with new liked songs
-- [ ] Docker Compose local development matching HealthMap patterns
+- [ ] Manual re-sync capability to update with new liked songs (v2)
 
 ### Out of Scope
 
@@ -35,6 +36,14 @@ The interactive world map that instantly reveals the geographic diversity of a m
 - Multi-user support — single-user personal tool
 
 ## Context
+
+### Codebase State (v1.0)
+
+- **Backend:** `backend/app/` — FastAPI with async SQLAlchemy, 11 REST endpoints, AI service with Claude + Redis caching
+- **Frontend:** `frontend/src/` — Next.js 14, Mapbox GL JS map, CountryPanel, StatsSidebar, SearchBar, AIChatPanel
+- **Pipeline:** `pipeline/` — parse_library.py, seed_library.py, enrich_spotify.py, enrich_musicbrainz.py, run_pipeline.py
+- **Database:** PostgreSQL with pg_trgm, tables: countries, artists, tracks, user_tracks, ai_query_log
+- **Infrastructure:** Docker Compose (postgres, redis, backend, frontend), Alembic migrations
 
 ### Data Profile
 - **Source:** Spotify data export at `~/Downloads/Spotify Account Data/`
@@ -55,7 +64,7 @@ The interactive world map that instantly reveals the geographic diversity of a m
 ### Product Decisions
 - App ships pre-loaded — no login, no onboarding, visitors see the map immediately
 - Artist country = origin country from MusicBrainz (where artist is FROM, not current residence)
-  - Rihanna = Barbados, Drake = Canada, 21 Savage = UK
+  - Rihanna = Barbados (note: MusicBrainz resolved to US — accepted as-is for v1), Drake = Canada, 21 Savage = UK
 - Geographic diversity score uses Shannon entropy normalized to 0-10 scale
 
 ## Constraints
@@ -72,12 +81,16 @@ The interactive world map that instantly reveals the geographic diversity of a m
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Library-only data (not streaming history) | Liked songs = deliberate curation, cleaner signal than 104K noisy play events | — Pending |
-| Export + API hybrid pipeline | Data export provides track/artist lists; API only needed for audio features and metadata. Faster, fewer API calls | — Pending |
-| Derive genre categories from data | Let Spotify's genre tags cluster naturally rather than imposing predefined buckets | — Pending |
-| Unknown artists in sidebar only | Keeps map clean while preserving data visibility | — Pending |
-| Manual re-sync (no live sync) | Simplest path; keeps auth complexity low; easy to add later | — Pending |
-| MusicBrainz origin country (not residence) | Makes map more geographically interesting and accurate to cultural roots | — Pending |
+| Library-only data (not streaming history) | Liked songs = deliberate curation, cleaner signal than 104K noisy play events | Good |
+| Export + API hybrid pipeline | Data export provides track/artist lists; API only needed for audio features and metadata. Faster, fewer API calls | Good |
+| Derive genre categories from data | Let Spotify's genre tags cluster naturally rather than imposing predefined buckets | Good |
+| Unknown artists in sidebar only | Keeps map clean while preserving data visibility | Good |
+| Manual re-sync (no live sync) | Simplest path; keeps auth complexity low; easy to add later | Good |
+| MusicBrainz origin country (not residence) | Makes map more geographically interesting and accurate to cultural roots | Good |
+| GeoJSON circle layer (not Mapbox Markers) | WebGL-rendered for performance at 3,022 marker scale | Good |
+| Audio features graceful degradation | Endpoint restricted Nov 2024; nullable columns designed in from Phase 1 | Good |
+| mb_resolution_status checkpoint/resume | Enables safe pipeline restarts without re-processing resolved artists | Good |
+| AsyncAnthropic client | Backend fully async; sync client would block the event loop | Good |
 
 ---
-*Last updated: 2026-03-24 after initialization*
+*Last updated: 2026-03-25 after v1.0 milestone*
