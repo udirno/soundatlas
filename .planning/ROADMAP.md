@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: Data Enrichment Pipeline** - Spotify API enrichment, MusicBrainz origin country resolution with checkpoint/resume, and full PostgreSQL seeding (completed 2026-03-25)
 - [x] **Phase 3: Backend API** - FastAPI REST endpoints for countries, artists, search, and analytics (completed 2026-03-24)
 - [x] **Phase 4: Map View and Country Detail** - Mapbox GL JS world map with GeoJSON circle layer and country drill-down panel (completed 2026-03-25)
-- [ ] **Phase 5: Global Stats and Search** - Sidebar analytics dashboard, diversity score, and pg_trgm fuzzy search with map navigation
+- [x] **Phase 5: Global Stats and Search** - Sidebar analytics dashboard, diversity score, and pg_trgm fuzzy search with map navigation (completed 2026-03-25)
 - [ ] **Phase 6: AI Chat** - Claude-powered natural language chat panel with RAG context, Redis caching, and query logging
 
 ## Phase Details
@@ -103,8 +103,8 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 05-01-PLAN.md — Backend search schema fix (add country_id), API client types, StatsSidebar component with dashboard stats and clickable top countries
-- [ ] 05-02-PLAN.md — SearchBar with debounced autocomplete, MapView flyToTarget prop, HomeClient wiring for search-to-map navigation
+- [x] 05-01-PLAN.md — Backend search schema fix (add country_id), API client types, StatsSidebar component with dashboard stats and clickable top countries
+- [x] 05-02-PLAN.md — SearchBar with debounced autocomplete, MapView flyToTarget prop, HomeClient wiring for search-to-map navigation
 
 ### Phase 6: AI Chat
 **Goal**: Opening the AI chat panel lets a user ask natural language questions about their listening library and receive accurate, context-aware answers drawn from PostgreSQL data, with responses cached and all queries logged.
@@ -133,5 +133,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 | 2. Data Enrichment Pipeline | 3/3 | Complete | 2026-03-25 |
 | 3. Backend API | 4/4 | Complete | 2026-03-24 |
 | 4. Map View and Country Detail | 3/3 | Complete | 2026-03-25 |
-| 5. Global Stats and Search | 0/2 | Not started | - |
+| 5. Global Stats and Search | 2/2 | Complete | 2026-03-25 |
 | 6. AI Chat | 0/2 | Not started | - |

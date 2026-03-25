@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-03-24)
 
 **Core value:** Interactive world map that instantly reveals the geographic diversity of a music library — every artist mapped to their origin country
-**Current focus:** Phase 4 COMPLETE — ready for Phase 5
+**Current focus:** Phase 5 COMPLETE — ready for Phase 6
 
 ## Current Position
 
-Phase: 5 of 6 (Global Stats and Search) — In progress
-Plan: 1 of 3 in phase 5 — COMPLETE
-Status: Phase 5 in progress — 05-01 complete (StatsSidebar + search country_id). Ready for 05-02 (Search UI + Map Navigation)
-Last activity: 2026-03-25 — Completed 05-01 (StatsSidebar, api.ts Phase 5 types, backend search country_id)
+Phase: 5 of 6 (Global Stats and Search) — COMPLETE
+Plan: 2 of 2 in phase 5 — COMPLETE
+Status: Phase 5 complete — all 2 plans executed, human-verified. Ready for Phase 6 (AI Chat)
+Last activity: 2026-03-25 — Completed 05-02 (SearchBar with autocomplete, MapView flyToTarget, search-to-map navigation)
 
-Progress: [████████░░] 79% (11/14 plans complete)
+Progress: [████████░░] 86% (12/14 plans complete)
 
 ## Performance Metrics
 
@@ -95,6 +95,9 @@ Recent decisions affecting current work:
 - [05-01]: Track search query LEFT JOINs Artist (isouter=True) to get country_id — defensive because artist_id on tracks could theoretically be null
 - [05-01]: Diversity score UI displays (diversity_score * 10).toFixed(1) — backend returns 0-1 float, sidebar shows 0-10 scale; color thresholds: green >= 7, yellow >= 4, red < 4
 - [05-01]: StatsSidebar is always visible (not toggled), fixed left panel, z-40 to stay above Mapbox canvas
+- [05-02]: flyToTarget prop pattern (not forwardRef) for programmatic map navigation — simpler with next/dynamic SSR-disabled components
+- [05-02]: map.once('moveend') to clear flyToTarget after animation — synchronous clear caused race condition with setSelectedCountryId
+- [05-02]: useCallback for stable function references (handleSearchSelect, handleFlyToComplete) — inline functions caused MapView useEffect re-fires from changing deps
 
 ### Pending Todos
 
@@ -110,5 +113,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-03-25
-Stopped at: Phase 5 Plan 01 COMPLETE — StatsSidebar + search country_id done
-Resume file: .planning/phases/05-global-stats-and-search/05-02-PLAN.md
+Stopped at: Phase 5 COMPLETE — all 2 plans done, human-verified. Ready for Phase 6 (AI Chat)
+Resume file: .planning/phases/06-ai-chat/ (when created)
