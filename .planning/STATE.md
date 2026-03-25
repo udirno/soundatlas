@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-03-24)
 ## Current Position
 
 Phase: 3 of 6 (Backend API) — In progress
-Plan: 1 of 6 in phase 3 complete
-Status: In progress — 03-01-PLAN.md complete (schemas + router stubs)
-Last activity: 2026-03-25 — Completed 03-01-PLAN.md (Pydantic v2 schemas and domain router wiring)
+Plan: 3 of 6 in phase 3 complete
+Status: In progress — 03-03-PLAN.md complete (fuzzy search endpoint with pg_trgm)
+Last activity: 2026-03-25 — Completed 03-03-PLAN.md (GET /api/search with similarity-ranked results and in_library signal)
 
-Progress: [████████░░] 36%
+Progress: [████████░░] 43%
 
 ## Performance Metrics
 
@@ -67,6 +67,9 @@ Recent decisions affecting current work:
 - [03-01]: Pydantic v2 ConfigDict(from_attributes=True) used on all ORM-backed response schemas — enables .model_validate(orm_object) without manual field mapping
 - [03-01]: ArtistListItem defined in artist.py, imported by country.py for CountryDetail.artists — import order in __init__.py: artist before country
 - [03-01]: Stub routers registered in main.py after CORS middleware with no endpoints — prefix stored on APIRouter not include_router(); endpoints added per-plan in Phase 3
+- [03-02]: Use empty string "" (not "/") on @router.get() when APIRouter has a prefix — @router.get("/") causes FastAPI 307 redirect from /api/countries to /api/countries/; "" resolves correctly
+- [03-02]: Two-query pattern in get_country_list — SQL aggregate for counts, second selectinload query for genre computation; cannot use Counter on aggregate result rows
+- [03-02]: Artist and country service functions both live in country_service.py — shared data domain, simpler than separate files at this scale
 
 ### Pending Todos
 
@@ -81,5 +84,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-03-25
-Stopped at: Phase 3, Plan 1 complete — schemas and router stubs done
-Resume file: .planning/phases/03-backend-api/03-02-PLAN.md
+Stopped at: Phase 3, Plan 2 complete — country + artist endpoints fully functional
+Resume file: .planning/phases/03-backend-api/03-03-PLAN.md
