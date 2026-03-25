@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import type { CountryListItem } from '@/lib/api';
 import CountryPanel from './CountryPanel';
@@ -21,13 +21,17 @@ export default function HomeClient({ countries }: HomeClientProps) {
   const [selectedCountryId, setSelectedCountryId] = useState<number | null>(null);
   const [flyToTarget, setFlyToTarget] = useState<{ lng: number; lat: number } | null>(null);
 
-  function handleSearchSelect(countryId: number) {
+  const handleSearchSelect = useCallback((countryId: number) => {
     const country = countries.find((c) => c.id === countryId);
     if (country && country.latitude != null && country.longitude != null) {
       setFlyToTarget({ lng: country.longitude, lat: country.latitude });
     }
     setSelectedCountryId(countryId);
-  }
+  }, [countries]);
+
+  const handleFlyToComplete = useCallback(() => {
+    setFlyToTarget(null);
+  }, []);
 
   return (
     <main className="w-full h-screen relative">
@@ -37,7 +41,7 @@ export default function HomeClient({ countries }: HomeClientProps) {
         countries={countries}
         onCountrySelect={setSelectedCountryId}
         flyToTarget={flyToTarget}
-        onFlyToComplete={() => setFlyToTarget(null)}
+        onFlyToComplete={handleFlyToComplete}
       />
       {selectedCountryId !== null && (
         <CountryPanel

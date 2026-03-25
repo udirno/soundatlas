@@ -157,12 +157,16 @@ export default function MapView({ countries, onCountrySelect, flyToTarget, onFly
   // Fly to a target when flyToTarget prop changes
   useEffect(() => {
     if (!flyToTarget || !map.current) return;
-    map.current.flyTo({
+    const m = map.current;
+    m.flyTo({
       center: [flyToTarget.lng, flyToTarget.lat],
-      zoom: Math.max(map.current.getZoom(), 4),
+      zoom: Math.max(m.getZoom(), 4),
       duration: 1200,
     });
-    onFlyToComplete?.();
+    // Clear flyToTarget after animation completes to avoid stale state
+    m.once('moveend', () => {
+      onFlyToComplete?.();
+    });
   }, [flyToTarget, onFlyToComplete]);
 
   return <div ref={mapContainer} className="w-full h-screen" />;
