@@ -5,7 +5,7 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 import type { CountryListItem } from '@/lib/api';
-import { GENRE_COLORS, FALLBACK_COLOR } from '@/lib/colors';
+import { getGenreColor } from '@/lib/colors';
 
 interface MapViewProps {
   countries: CountryListItem[];
@@ -18,6 +18,7 @@ interface CountryFeatureProperties {
   track_count: number;
   artist_count: number;
   top_genre: string;
+  genre_color: string;
 }
 
 function toGeoJSON(
@@ -37,24 +38,13 @@ function toGeoJSON(
         track_count: c.track_count,
         artist_count: c.artist_count,
         top_genre: c.top_genre ?? 'Unknown',
+        genre_color: getGenreColor(c.top_genre ?? ''),
       },
     }));
 
   return { type: 'FeatureCollection', features };
 }
 
-/**
- * Build a Mapbox match expression for circle-color from GENRE_COLORS.
- * Adding a genre to colors.ts automatically updates the map layer.
- */
-function buildCircleColorExpression(): mapboxgl.Expression {
-  const expr: unknown[] = ['match', ['get', 'top_genre']];
-  for (const [genre, color] of Object.entries(GENRE_COLORS)) {
-    expr.push(genre, color);
-  }
-  expr.push(FALLBACK_COLOR);
-  return expr as mapboxgl.Expression;
-}
 
 export default function MapView({ countries, onCountrySelect }: MapViewProps) {
   const mapContainer = useRef<HTMLDivElement>(null);
@@ -106,7 +96,7 @@ export default function MapView({ countries, onCountrySelect }: MapViewProps) {
             Math.sqrt(100), 20,
             Math.sqrt(500), 36,
           ],
-          'circle-color': buildCircleColorExpression(),
+          'circle-color': ['get', 'genre_color'],
           'circle-opacity': 0.85,
           'circle-stroke-width': 1,
           'circle-stroke-color': '#ffffff',
