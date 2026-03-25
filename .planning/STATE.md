@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-03-24)
 
 ## Current Position
 
-Phase: 4 of 6 (Map View and Country Detail) — COMPLETE
-Plan: 3 of 3 in phase 4 — COMPLETE
-Status: Phase 4 complete — all 3 plans executed, human-verified. Ready for Phase 5 (Global Stats and Search)
-Last activity: 2026-03-25 — Completed 04-03 (GenrePieChart, AudioFeatureChart, CountryPanel content, Docker/tooltip fixes)
+Phase: 5 of 6 (Global Stats and Search) — In progress
+Plan: 1 of 3 in phase 5 — COMPLETE
+Status: Phase 5 in progress — 05-01 complete (StatsSidebar + search country_id). Ready for 05-02 (Search UI + Map Navigation)
+Last activity: 2026-03-25 — Completed 05-01 (StatsSidebar, api.ts Phase 5 types, backend search country_id)
 
-Progress: [███████░░░] 71% (10/14 plans complete)
+Progress: [████████░░] 79% (11/14 plans complete)
 
 ## Performance Metrics
 
@@ -92,6 +92,9 @@ Recent decisions affecting current work:
 - [04-03]: API_URL (non-NEXT_PUBLIC) env var for server-side Docker routing via typeof window check — NEXT_PUBLIC_API_URL is for client-side browser requests
 - [04-03]: frontend/.dockerignore must exclude node_modules — without it, COPY . . overwrites container's npm install with host's (potentially stale) node_modules
 - [04-03]: Tooltip CSS needs !important to override Tailwind @tailwind base reset which sets background-color: white on all elements
+- [05-01]: Track search query LEFT JOINs Artist (isouter=True) to get country_id — defensive because artist_id on tracks could theoretically be null
+- [05-01]: Diversity score UI displays (diversity_score * 10).toFixed(1) — backend returns 0-1 float, sidebar shows 0-10 scale; color thresholds: green >= 7, yellow >= 4, red < 4
+- [05-01]: StatsSidebar is always visible (not toggled), fixed left panel, z-40 to stay above Mapbox canvas
 
 ### Pending Todos
 
@@ -107,5 +110,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-03-25
-Stopped at: Phase 4 COMPLETE — all 3 plans done, human-verified. Ready for Phase 5 (Global Stats and Search)
-Resume file: .planning/phases/05-global-stats-and-search/ (when created)
+Stopped at: Phase 5 Plan 01 COMPLETE — StatsSidebar + search country_id done
+Resume file: .planning/phases/05-global-stats-and-search/05-02-PLAN.md
