@@ -2,10 +2,12 @@
 
 import { useState, useCallback } from 'react';
 import dynamic from 'next/dynamic';
+import { MessageSquare } from 'lucide-react';
 import type { CountryListItem } from '@/lib/api';
 import CountryPanel from './CountryPanel';
 import StatsSidebar from './StatsSidebar';
 import SearchBar from './SearchBar';
+import AIChatPanel from './AIChatPanel';
 
 // Dynamic import with ssr:false must be in a client component context
 const MapView = dynamic(() => import('@/components/MapView'), {
@@ -20,6 +22,7 @@ interface HomeClientProps {
 export default function HomeClient({ countries }: HomeClientProps) {
   const [selectedCountryId, setSelectedCountryId] = useState<number | null>(null);
   const [flyToTarget, setFlyToTarget] = useState<{ lng: number; lat: number } | null>(null);
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   const handleSearchSelect = useCallback((countryId: number) => {
     const country = countries.find((c) => c.id === countryId);
@@ -48,6 +51,17 @@ export default function HomeClient({ countries }: HomeClientProps) {
           countryId={selectedCountryId}
           onClose={() => setSelectedCountryId(null)}
         />
+      )}
+      {isChatOpen ? (
+        <AIChatPanel onClose={() => setIsChatOpen(false)} />
+      ) : (
+        <button
+          onClick={() => setIsChatOpen(true)}
+          className="fixed bottom-4 right-4 z-40 w-14 h-14 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg flex items-center justify-center transition-colors"
+          aria-label="Open AI chat"
+        >
+          <MessageSquare size={24} />
+        </button>
       )}
     </main>
   );
