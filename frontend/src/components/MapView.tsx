@@ -10,6 +10,8 @@ import { getGenreColor } from '@/lib/colors';
 interface MapViewProps {
   countries: CountryListItem[];
   onCountrySelect?: (countryId: number) => void;
+  flyToTarget?: { lng: number; lat: number } | null;
+  onFlyToComplete?: () => void;
 }
 
 interface CountryFeatureProperties {
@@ -46,7 +48,7 @@ function toGeoJSON(
 }
 
 
-export default function MapView({ countries, onCountrySelect }: MapViewProps) {
+export default function MapView({ countries, onCountrySelect, flyToTarget, onFlyToComplete }: MapViewProps) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
 
@@ -151,6 +153,17 @@ export default function MapView({ countries, onCountrySelect }: MapViewProps) {
     // countries is intentionally excluded — map is initialized once on mount
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Fly to a target when flyToTarget prop changes
+  useEffect(() => {
+    if (!flyToTarget || !map.current) return;
+    map.current.flyTo({
+      center: [flyToTarget.lng, flyToTarget.lat],
+      zoom: Math.max(map.current.getZoom(), 4),
+      duration: 1200,
+    });
+    onFlyToComplete?.();
+  }, [flyToTarget, onFlyToComplete]);
 
   return <div ref={mapContainer} className="w-full h-screen" />;
 }
