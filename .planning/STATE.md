@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-03-24)
 
 ## Current Position
 
-Phase: 2 of 6 (Data Enrichment Pipeline) — COMPLETE
-Plan: 3 of 3 in phase 2
-Status: Phase 2 complete — ready to begin Phase 3 (Backend API)
-Last activity: 2026-03-25 — Completed 02-03-PLAN.md (pipeline orchestrator with stats logging)
+Phase: 3 of 6 (Backend API) — In progress
+Plan: 1 of 6 in phase 3 complete
+Status: In progress — 03-01-PLAN.md complete (schemas + router stubs)
+Last activity: 2026-03-25 — Completed 03-01-PLAN.md (Pydantic v2 schemas and domain router wiring)
 
-Progress: [████████░░] 33%
+Progress: [████████░░] 36%
 
 ## Performance Metrics
 
@@ -64,6 +64,9 @@ Recent decisions affecting current work:
 - [02-03]: run_pipeline.py calls each sub-script via subprocess.run with check=True — orchestrator halts on first non-zero exit; re-run resumes because all sub-scripts are idempotent
 - [02-03]: --stats-only mode duration reflects only the stats query time, not pipeline step time — by design (stats-only is not a pipeline run)
 - [02-02]: musicbrainzngs built-in 1 req/sec rate limiting used — no manual time.sleep() added to avoid double-throttling
+- [03-01]: Pydantic v2 ConfigDict(from_attributes=True) used on all ORM-backed response schemas — enables .model_validate(orm_object) without manual field mapping
+- [03-01]: ArtistListItem defined in artist.py, imported by country.py for CountryDetail.artists — import order in __init__.py: artist before country
+- [03-01]: Stub routers registered in main.py after CORS middleware with no endpoints — prefix stored on APIRouter not include_router(); endpoints added per-plan in Phase 3
 
 ### Pending Todos
 
@@ -78,5 +81,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-03-25
-Stopped at: Phase 2 COMPLETE (all 3 plans done) — ready to begin Phase 3 (Backend API)
-Resume file: .planning/phases/03-backend-api/03-01-PLAN.md (when created)
+Stopped at: Phase 3, Plan 1 complete — schemas and router stubs done
+Resume file: .planning/phases/03-backend-api/03-02-PLAN.md
