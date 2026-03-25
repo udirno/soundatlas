@@ -24,6 +24,7 @@ async def fuzzy_search(db: AsyncSession, q: str, limit: int = 20) -> dict:
             Artist.spotify_id,
             Artist.genres,
             Artist.image_url,
+            Artist.country_id,
             func.similarity(Artist.name, q).label("score"),
         )
         .where(func.similarity(Artist.name, q) > SIMILARITY_THRESHOLD)
@@ -39,16 +40,18 @@ async def fuzzy_search(db: AsyncSession, q: str, limit: int = 20) -> dict:
         .correlate(Track)
     )
 
-    # Track search query with in_library signal
+    # Track search query with in_library signal and artist country_id via LEFT JOIN
     track_stmt = (
         select(
             Track.id,
             Track.name,
             Track.spotify_id,
             Track.album_name,
+            Artist.country_id,
             func.similarity(Track.name, q).label("score"),
             in_library_subq.label("in_library"),
         )
+        .join(Artist, Track.artist_id == Artist.id, isouter=True)
         .where(func.similarity(Track.name, q) > SIMILARITY_THRESHOLD)
         .order_by(func.similarity(Track.name, q).desc())
         .limit(limit)

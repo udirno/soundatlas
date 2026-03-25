@@ -12,6 +12,7 @@ class SearchArtistHit(BaseModel):
     spotify_id: Optional[str] = None
     genres: Optional[list[str]] = None
     image_url: Optional[str] = None
+    country_id: Optional[int] = None
     score: float
 
 
@@ -22,6 +23,7 @@ class SearchTrackHit(BaseModel):
     name: str
     spotify_id: Optional[str] = None
     album_name: Optional[str] = None
+    country_id: Optional[int] = None
     score: float
     in_library: bool
 
