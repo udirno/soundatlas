@@ -139,3 +139,35 @@ export async function fetchSearch(q: string): Promise<SearchResult> {
   }
   return res.json() as Promise<SearchResult>;
 }
+
+export interface AIAskResponse {
+  answer: string;
+  query: string;
+  sources: string[];
+  cached?: boolean;
+  tokens?: number;
+}
+
+export interface AISuggestion {
+  question: string;
+}
+
+export async function askAI(question: string): Promise<AIAskResponse> {
+  const res = await fetch(`${getBaseUrl()}/api/ai/ask`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ question }),
+  });
+  if (!res.ok) {
+    throw new Error(`Failed to get AI answer: ${res.status} ${res.statusText}`);
+  }
+  return res.json() as Promise<AIAskResponse>;
+}
+
+export async function fetchAISuggestions(): Promise<AISuggestion[]> {
+  const res = await fetch(`${getBaseUrl()}/api/ai/suggestions`, { cache: 'no-store' });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch AI suggestions: ${res.status} ${res.statusText}`);
+  }
+  return res.json() as Promise<AISuggestion[]>;
+}
