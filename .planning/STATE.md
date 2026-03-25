@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-03-24)
 
 ## Current Position
 
-Phase: 1 of 6 (Infrastructure and Pipeline Foundation) — COMPLETE
-Plan: 3 of 3 in phase 1 (phase complete)
-Status: Phase 1 complete — ready for Phase 2
-Last activity: 2026-03-24 — Completed 01-03-PLAN.md (Spotify export parser + audio features validation)
+Phase: 2 of 6 (Data Enrichment Pipeline) — In progress
+Plan: 1 of 3 in phase 2
+Status: In progress — Plan 02-01 complete, ready for 02-02 (MusicBrainz country resolution)
+Last activity: 2026-03-25 — Completed 02-01-PLAN.md (library seeder + Spotify metadata enrichment)
 
-Progress: [███░░░░░░░] 18%
+Progress: [████░░░░░░] 24%
 
 ## Performance Metrics
 
@@ -28,9 +28,10 @@ Progress: [███░░░░░░░] 18%
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-infrastructure | 3/3 | ~60min | 20min |
+| 02-data-enrichment | 1/3 | ~30min | 30min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (30min), 01-02 (7min), 01-03 (25min)
+- Last 5 plans: 01-01 (30min), 01-02 (7min), 01-03 (25min), 02-01 (30min)
 - Trend: on track
 
 *Updated after each plan completion*
@@ -54,6 +55,9 @@ Recent decisions affecting current work:
 - [Phase 4]: Use GeoJSON source + circle layer (WebGL-rendered) for map markers — never use `new mapboxgl.Marker()` for dataset-scale points (kills performance at 3,022 artists)
 - [01-03]: YourLibrary.json uses flat field names `artist`, `album`, `track`, `uri` — not the `artistName`/`trackName` variants noted in pre-plan research
 - [01-03]: Audio features endpoint validation writes flag file at `pipeline/.audio_features_available` — Phase 2 reads this before attempting batch fetch; 403 is handled as a valid/expected outcome
+- [02-01]: Artist name is NOT unique in artists table — seed_library.py uses SELECT-before-INSERT with local dict (not ON CONFLICT) for idempotency
+- [02-01]: spotify_id UNIQUE constraint: two differently-named artists can map to same Spotify ID — enrich_spotify.py handles UniqueViolation with rollback+skip, leaving second artist's spotify_id NULL
+- [02-01]: 264 artists (8.7%) left with spotify_id=NULL after Spotify search — name mismatch or not on Spotify; MusicBrainz resolution (02-02) handles remaining
 
 ### Pending Todos
 
@@ -67,6 +71,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-24
-Stopped at: Phase 1 complete — ready for Phase 2 (Data Enrichment Pipeline)
-Resume file: .planning/phases/02-data-enrichment-pipeline/02-01-PLAN.md
+Last session: 2026-03-25
+Stopped at: Phase 2, Plan 1 complete — ready for 02-02 (MusicBrainz country resolution)
+Resume file: .planning/phases/02-data-enrichment-pipeline/02-02-PLAN.md
