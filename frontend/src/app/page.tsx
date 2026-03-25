@@ -1,11 +1,6 @@
-import dynamic from 'next/dynamic';
 import { fetchCountries } from '@/lib/api';
 import type { CountryListItem } from '@/lib/api';
-
-const MapView = dynamic(() => import('@/components/MapView'), {
-  ssr: false,
-  loading: () => <div className="w-full h-screen bg-gray-950" />,
-});
+import HomeClient from '@/components/HomeClient';
 
 export default async function Home() {
   let countries: CountryListItem[] = [];
@@ -16,9 +11,5 @@ export default async function Home() {
     console.error('Failed to fetch countries for map:', err);
   }
 
-  return (
-    <main className="w-full h-screen">
-      <MapView countries={countries} />
-    </main>
-  );
+  return <HomeClient countries={countries} />;
 }
