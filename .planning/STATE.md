@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-03-24)
 
 **Core value:** Interactive world map that instantly reveals the geographic diversity of a music library — every artist mapped to their origin country
-**Current focus:** Phase 1 - Infrastructure and Pipeline Foundation
+**Current focus:** Phase 3 - Backend API
 
 ## Current Position
 
 Phase: 3 of 6 (Backend API) — In progress
-Plan: 3 of 6 in phase 3 complete
-Status: In progress — 03-03-PLAN.md complete (fuzzy search endpoint with pg_trgm)
-Last activity: 2026-03-25 — Completed 03-03-PLAN.md (GET /api/search with similarity-ranked results and in_library signal)
+Plan: 4 of 6 in phase 3 complete
+Status: In progress — 03-04-PLAN.md complete (analytics endpoints + AI route stubs)
+Last activity: 2026-03-25 — Completed 03-04-PLAN.md (analytics dashboard/genres/features, AI ask/suggestions stubs)
 
-Progress: [████████░░] 43%
+Progress: [████████░░] 50%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
-- Average duration: 20 min
-- Total execution time: ~1 hour
+- Total plans completed: 7
+- Average duration: ~15 min
+- Total execution time: ~1 hour 40 min
 
 **By Phase:**
 
@@ -29,9 +29,10 @@ Progress: [████████░░] 43%
 |-------|-------|-------|----------|
 | 01-infrastructure | 3/3 | ~60min | 20min |
 | 02-data-enrichment | 3/3 | ~103min | 34min |
+| 03-backend-api | 4/6 (in progress) | ~8min | ~2min |
 
 **Recent Trend:**
-- Last 5 plans: 01-02 (7min), 01-03 (25min), 02-01 (30min), 02-02 (70min), 02-03 (3min)
+- Last 5 plans: 02-02 (70min), 02-03 (3min), 03-01 (<5min), 03-03 (<5min), 03-04 (2min)
 - Trend: on track
 
 *Updated after each plan completion*
@@ -72,6 +73,10 @@ Recent decisions affecting current work:
 - [03-02]: Use empty string "" (not "/") on @router.get() when APIRouter has a prefix — @router.get("/") causes FastAPI 307 redirect from /api/countries to /api/countries/; "" resolves correctly
 - [03-02]: Two-query pattern in get_country_list — SQL aggregate for counts, second selectinload query for genre computation; cannot use Counter on aggregate result rows
 - [03-02]: Artist and country service functions both live in country_service.py — shared data domain, simpler than separate files at this scale
+- [03-04]: calculate_diversity_score returns 0.0 for n<=1 — avoids math.log(1)=0 division; single-country library has zero diversity by definition
+- [03-04]: Genre distribution uses raw SQL text() unnest — no SQLAlchemy ORM equivalent for PostgreSQL ARRAY unnest; text().bindparams() used for safe parameterization
+- [03-04]: Audio feature averages return None fields gracefully — tracks table has no audio data (Spotify endpoint restricted Nov 2024); frontend must handle null feature values
+- [03-04]: AI routes have no db dependency in Phase 3 — Phase 6 will add RAG logic; schema contract established now so frontend can code against it
 
 ### Pending Todos
 
@@ -79,12 +84,12 @@ None.
 
 ### Blockers/Concerns
 
-- [Phase 1]: Spotify audio features endpoint availability is LOW confidence — must be tested live before Phase 2 enrichment code is written. If 403, audio feature charts in Phase 4 will be skipped or shown as empty with explanation.
+- [Phase 4]: Audio feature charts will show null/empty data — Spotify audio features endpoint was restricted for new app registrations. Frontend should handle gracefully with "data unavailable" state.
 - [Phase 2]: MusicBrainz disambiguation accuracy on actual 3,022 artist dataset is untested. Budget time in Phase 2 for a manual audit of the first 200 resolved artists before running the full pipeline.
 - [Infrastructure]: Local PostgreSQL running on port 5432 conflicts with Docker-mapped port. All pipeline scripts connecting to the database must use Docker networking (`--network soundatlas_soundatlas_network`). This affects every plan in Phase 2 that runs pipeline scripts from host.
 
 ## Session Continuity
 
 Last session: 2026-03-25
-Stopped at: Phase 3, Plan 3 complete — fuzzy search endpoint (GET /api/search) done
-Resume file: .planning/phases/03-backend-api/03-04-PLAN.md
+Stopped at: Phase 3, Plan 4 complete — analytics endpoints and AI stubs done
+Resume file: .planning/phases/03-backend-api/03-05-PLAN.md
