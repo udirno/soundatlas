@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-03-24)
 
 ## Current Position
 
-Phase: 5 of 6 (Global Stats and Search) — COMPLETE
-Plan: 2 of 2 in phase 5 — COMPLETE
-Status: Phase 5 complete — all 2 plans executed, human-verified. Ready for Phase 6 (AI Chat)
-Last activity: 2026-03-25 — Completed 05-02 (SearchBar with autocomplete, MapView flyToTarget, search-to-map navigation)
+Phase: 6 of 6 (AI Chat) — In progress
+Plan: 1 of 2 in phase 6 — COMPLETE
+Status: In progress — 06-01 executed. Ready for 06-02 (frontend AI chat UI)
+Last activity: 2026-03-25 — Completed 06-01 (AI chat backend: AsyncAnthropic, Redis caching, RAG endpoints)
 
-Progress: [████████░░] 86% (12/14 plans complete)
+Progress: [█████████░] 93% (13/14 plans complete)
 
 ## Performance Metrics
 
@@ -98,6 +98,11 @@ Recent decisions affecting current work:
 - [05-02]: flyToTarget prop pattern (not forwardRef) for programmatic map navigation — simpler with next/dynamic SSR-disabled components
 - [05-02]: map.once('moveend') to clear flyToTarget after animation — synchronous clear caused race condition with setSelectedCountryId
 - [05-02]: useCallback for stable function references (handleSearchSelect, handleFlyToComplete) — inline functions caused MapView useEffect re-fires from changing deps
+- [06-01]: REDIS_URL overridden in docker-compose.yml backend environment to redis://redis:6379 — .env localhost:6379 only valid on host; same pattern as DATABASE_URL from 01-01
+- [06-01]: Use AsyncAnthropic (NOT sync Anthropic) — backend is fully async; sync client would block event loop
+- [06-01]: Use redis.asyncio (NOT deprecated aioredis package) — bundled in redis==5.1.0 already installed
+- [06-01]: Log to ai_query_log only on cache miss — cache hits made no Claude call, so no tokens or timing to record
+- [06-01]: MODEL = "claude-sonnet-4-5-20250929", MAX_TOKENS = 1024, CACHE_TTL_SECONDS = 3600
 
 ### Pending Todos
 
@@ -113,5 +118,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-03-25
-Stopped at: Phase 5 COMPLETE — all 2 plans done, human-verified. Ready for Phase 6 (AI Chat)
-Resume file: .planning/phases/06-ai-chat/ (when created)
+Stopped at: Phase 6, Plan 01 COMPLETE — AI chat backend (AsyncAnthropic, Redis caching, RAG endpoints)
+Resume file: .planning/phases/06-ai-chat/06-02-PLAN.md
