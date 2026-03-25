@@ -67,6 +67,8 @@ Recent decisions affecting current work:
 - [03-01]: Pydantic v2 ConfigDict(from_attributes=True) used on all ORM-backed response schemas — enables .model_validate(orm_object) without manual field mapping
 - [03-01]: ArtistListItem defined in artist.py, imported by country.py for CountryDetail.artists — import order in __init__.py: artist before country
 - [03-01]: Stub routers registered in main.py after CORS middleware with no endpoints — prefix stored on APIRouter not include_router(); endpoints added per-plan in Phase 3
+- [03-03]: Use @router.get("") (empty string) not "/" for root endpoints on prefixed routers — "/" causes FastAPI 307 trailing-slash redirect; consistent with artists.py convention
+- [03-03]: SIMILARITY_THRESHOLD = 0.15 (not pg_trgm default 0.3) — lower threshold needed for music names which are short/unusual; GIN trigram indexes on artists.name and tracks.name already created in Phase 1
 - [03-02]: Use empty string "" (not "/") on @router.get() when APIRouter has a prefix — @router.get("/") causes FastAPI 307 redirect from /api/countries to /api/countries/; "" resolves correctly
 - [03-02]: Two-query pattern in get_country_list — SQL aggregate for counts, second selectinload query for genre computation; cannot use Counter on aggregate result rows
 - [03-02]: Artist and country service functions both live in country_service.py — shared data domain, simpler than separate files at this scale
@@ -84,5 +86,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-03-25
-Stopped at: Phase 3, Plan 2 complete — country + artist endpoints fully functional
-Resume file: .planning/phases/03-backend-api/03-03-PLAN.md
+Stopped at: Phase 3, Plan 3 complete — fuzzy search endpoint (GET /api/search) done
+Resume file: .planning/phases/03-backend-api/03-04-PLAN.md
