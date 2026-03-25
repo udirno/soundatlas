@@ -1,8 +1,24 @@
-export default function Home() {
+import dynamic from 'next/dynamic';
+import { fetchCountries } from '@/lib/api';
+import type { CountryListItem } from '@/lib/api';
+
+const MapView = dynamic(() => import('@/components/MapView'), {
+  ssr: false,
+  loading: () => <div className="w-full h-screen bg-gray-950" />,
+});
+
+export default async function Home() {
+  let countries: CountryListItem[] = [];
+
+  try {
+    countries = await fetchCountries();
+  } catch (err) {
+    console.error('Failed to fetch countries for map:', err);
+  }
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gray-950 text-white">
-      <h1 className="text-6xl font-bold tracking-tight">SoundAtlas</h1>
-      <p className="mt-4 text-xl text-gray-400">Your music, mapped.</p>
+    <main className="w-full h-screen">
+      <MapView countries={countries} />
     </main>
   );
 }
