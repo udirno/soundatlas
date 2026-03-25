@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-03-24)
 
 ## Current Position
 
-Phase: 2 of 6 (Data Enrichment Pipeline) — In progress
-Plan: 2 of 3 in phase 2
-Status: In progress — Plan 02-02 complete, ready for 02-03 (pipeline orchestrator)
-Last activity: 2026-03-24 — Completed 02-02-PLAN.md (MusicBrainz country resolution — 2,174/3,022 artists resolved)
+Phase: 2 of 6 (Data Enrichment Pipeline) — COMPLETE
+Plan: 3 of 3 in phase 2
+Status: Phase 2 complete — ready to begin Phase 3 (Backend API)
+Last activity: 2026-03-25 — Completed 02-03-PLAN.md (pipeline orchestrator with stats logging)
 
-Progress: [█████░░░░░] 31%
+Progress: [████████░░] 33%
 
 ## Performance Metrics
 
@@ -28,11 +28,11 @@ Progress: [█████░░░░░] 31%
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-infrastructure | 3/3 | ~60min | 20min |
-| 02-data-enrichment | 2/3 | ~100min | 50min |
+| 02-data-enrichment | 3/3 | ~103min | 34min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (30min), 01-02 (7min), 01-03 (25min), 02-01 (30min), 02-02 (70min)
-- Trend: on track (02-02 long due to 67min pipeline run at 1 req/sec — expected)
+- Last 5 plans: 01-02 (7min), 01-03 (25min), 02-01 (30min), 02-02 (70min), 02-03 (3min)
+- Trend: on track
 
 *Updated after each plan completion*
 
@@ -61,6 +61,8 @@ Recent decisions affecting current work:
 - [02-02]: Score threshold 80 chosen as conservative v1 default — ambiguous single-name artists (Prince, The Police) may resolve incorrectly, auditable post-launch; tightening to 90+ would significantly increase not_found count
 - [02-02]: Rihanna resolved to US not Barbados — upstream MusicBrainz data issue (she is US-based in their data), not a script bug; accepted as-is for v1
 - [02-02]: Do NOT derive country from MusicBrainz area field — areas can be cities/regions, not countries; only top-level country ISO alpha-2 field is used
+- [02-03]: run_pipeline.py calls each sub-script via subprocess.run with check=True — orchestrator halts on first non-zero exit; re-run resumes because all sub-scripts are idempotent
+- [02-03]: --stats-only mode duration reflects only the stats query time, not pipeline step time — by design (stats-only is not a pipeline run)
 - [02-02]: musicbrainzngs built-in 1 req/sec rate limiting used — no manual time.sleep() added to avoid double-throttling
 
 ### Pending Todos
@@ -75,6 +77,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-24
-Stopped at: Phase 2, Plan 2 complete — ready for 02-03 (pipeline orchestrator with stats logging)
-Resume file: .planning/phases/02-data-enrichment-pipeline/02-03-PLAN.md
+Last session: 2026-03-25
+Stopped at: Phase 2 COMPLETE (all 3 plans done) — ready to begin Phase 3 (Backend API)
+Resume file: .planning/phases/03-backend-api/03-01-PLAN.md (when created)

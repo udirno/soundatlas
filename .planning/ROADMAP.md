@@ -13,7 +13,7 @@ SoundAtlas ships as a data-first project: an offline pipeline seeds PostgreSQL w
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Infrastructure and Pipeline Foundation** - Docker Compose environment, database schema, and Spotify export parsing with audio features validation (completed 2026-03-24)
-- [ ] **Phase 2: Data Enrichment Pipeline** - Spotify API enrichment, MusicBrainz origin country resolution with checkpoint/resume, and full PostgreSQL seeding
+- [x] **Phase 2: Data Enrichment Pipeline** - Spotify API enrichment, MusicBrainz origin country resolution with checkpoint/resume, and full PostgreSQL seeding (completed 2026-03-25)
 - [ ] **Phase 3: Backend API** - FastAPI REST endpoints for countries, artists, search, and analytics
 - [ ] **Phase 4: Map View and Country Detail** - Mapbox GL JS world map with GeoJSON circle layer and country drill-down panel
 - [ ] **Phase 5: Global Stats and Search** - Sidebar analytics dashboard, diversity score, and pg_trgm fuzzy search with map navigation
@@ -53,7 +53,7 @@ Plans:
 Plans:
 - [x] 02-01-PLAN.md — Seed artists/tracks into PostgreSQL from parsed library and enrich with Spotify artist metadata (genres, popularity, image URL)
 - [x] 02-02-PLAN.md — MusicBrainz origin country resolution with disambiguation, checkpoint/resume via mb_resolution_status column
-- [ ] 02-03-PLAN.md — Pipeline orchestrator (run_pipeline.py) with comprehensive stats logging
+- [x] 02-03-PLAN.md — Pipeline orchestrator (run_pipeline.py) with comprehensive stats logging
 
 ### Phase 3: Backend API
 **Goal**: All REST endpoints return correct data from the seeded PostgreSQL database, fuzzy search works against artists and tracks, and the backend matches HealthMap's async patterns, CORS configuration, and startup behavior.
@@ -130,7 +130,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Infrastructure and Pipeline Foundation | 3/3 | Complete | 2026-03-24 |
-| 2. Data Enrichment Pipeline | 2/3 | In progress | - |
+| 2. Data Enrichment Pipeline | 3/3 | Complete | 2026-03-25 |
 | 3. Backend API | 0/4 | Not started | - |
 | 4. Map View and Country Detail | 0/3 | Not started | - |
 | 5. Global Stats and Search | 0/2 | Not started | - |
