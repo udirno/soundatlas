@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Mapbox tooltip dark styling */
+.mapboxgl-popup-content {
+  background: rgba(15, 23, 42, 0.95);
+  color: #f8fafc;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.4;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+.mapboxgl-popup-tip {
+  border-top-color: rgba(15, 23, 42, 0.95);
+}

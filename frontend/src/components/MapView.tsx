@@ -75,6 +75,13 @@ export default function MapView({ countries, onCountrySelect }: MapViewProps) {
 
     const geojson = toGeoJSON(countries);
 
+    // Tooltip instance — created outside load callback, lives for map lifetime
+    const tooltip = new mapboxgl.Popup({
+      closeButton: false,
+      closeOnClick: false,
+      offset: [0, -12],
+    });
+
     map.current.on('load', () => {
       if (!map.current) return;
 
@@ -107,26 +114,47 @@ export default function MapView({ countries, onCountrySelect }: MapViewProps) {
         },
       });
 
-      // Click handler
-      if (onCountrySelect) {
-        map.current.on('click', 'country-circles', (e) => {
-          if (e.features && e.features[0]) {
-            const props = e.features[0].properties as CountryFeatureProperties;
-            onCountrySelect(props.id);
-          }
+      // Hover tooltip
+      map.current.on('mousemove', 'country-circles', (e) => {
+        if (!map.current || !e.features || !e.features[0]) return;
+
+        map.current.getCanvas().style.cursor = 'pointer';
+
+        const rawFeature = e.features[0];
+        const props = rawFeature.properties as CountryFeatureProperties;
+        const coordinates = (rawFeature.geometry as GeoJSON.Point).coordinates as [number, number];
+
+        const topGenre = props.top_genre ?? 'Unknown';
+        const html = `<strong>${props.name}</strong><br/>${props.artist_count} artists &middot; ${topGenre}`;
+
+        tooltip.setLngLat(coordinates).setHTML(html).addTo(map.current);
+      });
+
+      map.current.on('mouseleave', 'country-circles', () => {
+        if (map.current) map.current.getCanvas().style.cursor = '';
+        tooltip.remove();
+      });
+
+      // Click-to-fly + country selection
+      map.current.on('click', 'country-circles', (e) => {
+        if (!map.current || !e.features || !e.features[0]) return;
+
+        const rawFeature = e.features[0];
+        const props = rawFeature.properties as CountryFeatureProperties;
+        const coords = (rawFeature.geometry as GeoJSON.Point).coordinates as [number, number];
+
+        map.current.flyTo({
+          center: coords,
+          zoom: Math.max(map.current.getZoom(), 4),
+          duration: 1200,
         });
 
-        map.current.on('mouseenter', 'country-circles', () => {
-          if (map.current) map.current.getCanvas().style.cursor = 'pointer';
-        });
-
-        map.current.on('mouseleave', 'country-circles', () => {
-          if (map.current) map.current.getCanvas().style.cursor = '';
-        });
-      }
+        onCountrySelect?.(props.id);
+      });
     });
 
     return () => {
+      tooltip.remove();
       map.current?.remove();
       map.current = null;
     };
