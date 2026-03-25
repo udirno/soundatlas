@@ -48,12 +48,12 @@ Plans:
   3. If the pipeline crashes mid-run and is restarted, it resumes from where it stopped — no artist is processed twice, no progress is lost
   4. All enriched data lands in PostgreSQL via upsert with no duplicate rows after multiple pipeline runs
   5. A stats log is printed after pipeline completion showing counts of resolved artists, unresolved artists, tracks processed, and total duration
-**Plans**: TBD
+**Plans:** 3 plans
 
 Plans:
-- [ ] 02-01: Spotify audio features batch fetch (batches of 100 tracks) and artist metadata fetch
-- [ ] 02-02: MusicBrainz origin country resolution with rate limiting, disambiguation handling, and checkpoint/resume
-- [ ] 02-03: PostgreSQL upsert seeding and pipeline stats logging
+- [ ] 02-01-PLAN.md — Seed artists/tracks into PostgreSQL from parsed library and enrich with Spotify artist metadata (genres, popularity, image URL)
+- [ ] 02-02-PLAN.md — MusicBrainz origin country resolution with disambiguation, checkpoint/resume via mb_resolution_status column
+- [ ] 02-03-PLAN.md — Pipeline orchestrator (run_pipeline.py) with comprehensive stats logging
 
 ### Phase 3: Backend API
 **Goal**: All REST endpoints return correct data from the seeded PostgreSQL database, fuzzy search works against artists and tracks, and the backend matches HealthMap's async patterns, CORS configuration, and startup behavior.
