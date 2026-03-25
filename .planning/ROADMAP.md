@@ -83,12 +83,12 @@ Plans:
   3. Clicking a country circle flies the map to that country and opens a right-side detail panel
   4. The detail panel shows the country name, a sorted list of artists with images and genres, and a Recharts genre pie chart
   5. The detail panel shows an audio feature comparison chart (country average vs global average for energy, danceability, valence, tempo) and a top tracks list with audio feature highlights
-**Plans**: TBD
+**Plans:** 3 plans
 
 Plans:
-- [ ] 04-01: Next.js app shell, Mapbox GL JS integration with GeoJSON circle layer (data-driven radius and color)
-- [ ] 04-02: Map interaction — hover tooltips and click-to-fly behavior using layer-scoped event handlers
-- [ ] 04-03: Country detail panel — artist list, genre pie chart, audio feature comparison (Recharts RadarChart), top tracks
+- [ ] 04-01-PLAN.md — Install mapbox-gl/recharts, create typed API client and color palette, build MapView with GeoJSON circle layer
+- [ ] 04-02-PLAN.md — Hover tooltips, click-to-fly, CountryPanel shell with data fetching
+- [ ] 04-03-PLAN.md — Artist list, genre pie chart, audio feature radar chart, top tracks in CountryPanel
 
 ### Phase 5: Global Stats and Search
 **Goal**: A sidebar shows global library analytics including the diversity score and top countries, and searching for an artist or track by name navigates the map to their origin country and opens the detail panel.
