@@ -100,11 +100,11 @@ Plans:
   3. Typing in the search bar shows autocomplete suggestions against artists and tracks using fuzzy matching
   4. Selecting a search result flies the map to that artist's origin country and opens the detail panel for that country
   5. Searching for an artist or track not in the library shows a "Not in your library" message instead of navigation
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 05-01: Global stats sidebar component (diversity score, country counts, genre distribution, top 5 countries)
-- [ ] 05-02: Search bar with pg_trgm autocomplete and map navigation on result selection
+- [ ] 05-01-PLAN.md — Backend search schema fix (add country_id), API client types, StatsSidebar component with dashboard stats and clickable top countries
+- [ ] 05-02-PLAN.md — SearchBar with debounced autocomplete, MapView flyToTarget prop, HomeClient wiring for search-to-map navigation
 
 ### Phase 6: AI Chat
 **Goal**: Opening the AI chat panel lets a user ask natural language questions about their listening library and receive accurate, context-aware answers drawn from PostgreSQL data, with responses cached and all queries logged.
