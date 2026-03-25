@@ -51,8 +51,8 @@ Plans:
 **Plans:** 3 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Seed artists/tracks into PostgreSQL from parsed library and enrich with Spotify artist metadata (genres, popularity, image URL)
-- [ ] 02-02-PLAN.md — MusicBrainz origin country resolution with disambiguation, checkpoint/resume via mb_resolution_status column
+- [x] 02-01-PLAN.md — Seed artists/tracks into PostgreSQL from parsed library and enrich with Spotify artist metadata (genres, popularity, image URL)
+- [x] 02-02-PLAN.md — MusicBrainz origin country resolution with disambiguation, checkpoint/resume via mb_resolution_status column
 - [ ] 02-03-PLAN.md — Pipeline orchestrator (run_pipeline.py) with comprehensive stats logging
 
 ### Phase 3: Backend API
@@ -130,7 +130,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Infrastructure and Pipeline Foundation | 3/3 | Complete | 2026-03-24 |
-| 2. Data Enrichment Pipeline | 0/3 | Not started | - |
+| 2. Data Enrichment Pipeline | 2/3 | In progress | - |
 | 3. Backend API | 0/4 | Not started | - |
 | 4. Map View and Country Detail | 0/3 | Not started | - |
 | 5. Global Stats and Search | 0/2 | Not started | - |
