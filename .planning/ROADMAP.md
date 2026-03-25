@@ -65,13 +65,13 @@ Plans:
   3. `GET /api/search?q=` returns fuzzy-matched artists and tracks using pg_trgm, including a "Not in your library" signal for missing items
   4. `GET /api/analytics/dashboard` returns global stats including diversity score, top countries, and genre distribution
   5. `POST /api/ai/ask` and `GET /api/ai/suggestions` routes exist and return structured responses (AI integration completed in Phase 6)
-**Plans**: TBD
+**Plans:** 4 plans
 
 Plans:
-- [ ] 03-01: SQLAlchemy ORM models, Pydantic schemas, and FastAPI app setup (lifespan, CORS, async sessions)
-- [ ] 03-02: Country and artist endpoints (API-01 through API-05)
-- [ ] 03-03: Search endpoint with pg_trgm fuzzy matching (API-06)
-- [ ] 03-04: Analytics endpoints and AI route stubs (API-07 through API-11)
+- [ ] 03-01-PLAN.md — Pydantic v2 schemas, APIRouter stubs, and main.py router registration
+- [ ] 03-02-PLAN.md — Country and artist endpoints with service layer (API-01 through API-05)
+- [ ] 03-03-PLAN.md — Search endpoint with pg_trgm fuzzy matching (API-06)
+- [ ] 03-04-PLAN.md — Analytics endpoints and AI route stubs (API-07 through API-11)
 
 ### Phase 4: Map View and Country Detail
 **Goal**: Visiting the app shows an interactive world map with country markers sized by track count and colored by genre, clicking a country opens a detail panel with artist list, genre chart, audio feature comparison, and top tracks.
