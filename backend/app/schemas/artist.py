@@ -14,6 +14,7 @@ class ArtistListItem(BaseModel):
     genres: Optional[list[str]] = None
     popularity: Optional[int] = None
     image_url: Optional[str] = None
+    track_count: int = 0
 
 
 class TrackListItem(BaseModel):

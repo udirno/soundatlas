@@ -28,6 +28,7 @@ async def get_country_list(db: AsyncSession) -> list[dict]:
             Country.iso_alpha2,
             Country.latitude,
             Country.longitude,
+            Country.region,
             func.count(Artist.id.distinct()).label("artist_count"),
             func.count(Track.id.distinct()).label("track_count"),
         )
@@ -39,6 +40,7 @@ async def get_country_list(db: AsyncSession) -> list[dict]:
             Country.iso_alpha2,
             Country.latitude,
             Country.longitude,
+            Country.region,
         )
         .order_by(func.count(Artist.id.distinct()).desc())
     )
@@ -109,15 +111,33 @@ async def get_country_detail(db: AsyncSession, country_id: int) -> dict | None:
         vals = feature_values[feature]
         audio_feature_averages[feature] = sum(vals) / len(vals) if vals else None
 
+    # Compute track_count per artist and sort by track count descending
+    for artist in country.artists:
+        artist.track_count = len(artist.tracks)
+
+    sorted_artists = sorted(country.artists, key=lambda a: len(a.tracks), reverse=True)
+
+    # Collect top 10 tracks from highest-track-count artists
+    top_tracks = []
+    for artist in sorted_artists:
+        for track in artist.tracks:
+            top_tracks.append(track)
+            if len(top_tracks) >= 10:
+                break
+        if len(top_tracks) >= 10:
+            break
+
     return {
         "id": country.id,
         "name": country.name,
         "iso_alpha2": country.iso_alpha2,
+        "region": country.region,
         "latitude": country.latitude,
         "longitude": country.longitude,
         "artists": country.artists,  # ORM objects — Pydantic handles serialization
         "genre_breakdown": genre_breakdown,
         "audio_feature_averages": audio_feature_averages,
+        "top_tracks": top_tracks,
     }
 
 

@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Optional
 from pydantic import BaseModel, ConfigDict
 
-from app.schemas.artist import ArtistListItem
+from app.schemas.artist import ArtistListItem, TrackListItem
 
 
 class CountryListItem(BaseModel):
@@ -12,6 +12,7 @@ class CountryListItem(BaseModel):
     id: int
     name: str
     iso_alpha2: str
+    region: Optional[str] = None
     latitude: Optional[float] = None
     longitude: Optional[float] = None
     artist_count: int = 0
@@ -25,11 +26,13 @@ class CountryDetail(BaseModel):
     id: int
     name: str
     iso_alpha2: str
+    region: Optional[str] = None
     latitude: Optional[float] = None
     longitude: Optional[float] = None
     artists: list[ArtistListItem] = []
     genre_breakdown: dict[str, int] = {}
     audio_feature_averages: dict[str, Optional[float]] = {}
+    top_tracks: list[TrackListItem] = []
 
 
 class CountryComparison(BaseModel):

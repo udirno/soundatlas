@@ -18,6 +18,7 @@ class Country(Base):
     iso_alpha2: Mapped[str] = mapped_column(String(2), unique=True, nullable=False)
     latitude: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
     longitude: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+    region: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
 
     # Relationships
