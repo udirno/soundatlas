@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-03-24)
 
 **Core value:** Interactive world map that instantly reveals the geographic diversity of a music library — every artist mapped to their origin country
-**Current focus:** Phase 5 COMPLETE — ready for Phase 6
+**Current focus:** Phase 6 COMPLETE — all 14/14 plans done, milestone complete
 
 ## Current Position
 
-Phase: 6 of 6 (AI Chat) — In progress
-Plan: 1 of 2 in phase 6 — COMPLETE
-Status: In progress — 06-01 executed. Ready for 06-02 (frontend AI chat UI)
-Last activity: 2026-03-25 — Completed 06-01 (AI chat backend: AsyncAnthropic, Redis caching, RAG endpoints)
+Phase: 6 of 6 (AI Chat) — COMPLETE
+Plan: 2 of 2 in phase 6 — COMPLETE
+Status: Phase 6 complete — all 2 plans executed, human-verified. Milestone complete (all 14 plans done)
+Last activity: 2026-03-25 — Completed 06-02 (AIChatPanel with toggle, suggestion chips, conversation UI)
 
-Progress: [█████████░] 93% (13/14 plans complete)
+Progress: [██████████] 100% (14/14 plans complete)
 
 ## Performance Metrics
 
@@ -103,6 +103,10 @@ Recent decisions affecting current work:
 - [06-01]: Use redis.asyncio (NOT deprecated aioredis package) — bundled in redis==5.1.0 already installed
 - [06-01]: Log to ai_query_log only on cache miss — cache hits made no Claude call, so no tokens or timing to record
 - [06-01]: MODEL = "claude-sonnet-4-5-20250929", MAX_TOKENS = 1024, CACHE_TTL_SECONDS = 3600
+- [06-02]: lucide-react installed for X close icon — not in original package.json, added as Rule 3 fix
+- [06-02]: Fixed bottom-right z-50 positioning keeps chat panel clear of StatsSidebar (left, z-40) and CountryPanel (right, z-30)
+- [06-02]: Conversation history resets when panel closes — no persistence by design for v1
+- [06-02]: Blue circular toggle button added to HomeClient bottom-right — dedicated UI affordance separate from nav bar
 
 ### Pending Todos
 
@@ -118,5 +122,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-03-25
-Stopped at: Phase 6, Plan 01 COMPLETE — AI chat backend (AsyncAnthropic, Redis caching, RAG endpoints)
-Resume file: .planning/phases/06-ai-chat/06-02-PLAN.md
+Stopped at: Phase 6 COMPLETE — all plans done, milestone complete
+Resume file: N/A — all 14/14 plans complete

@@ -17,7 +17,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3: Backend API** - FastAPI REST endpoints for countries, artists, search, and analytics (completed 2026-03-24)
 - [x] **Phase 4: Map View and Country Detail** - Mapbox GL JS world map with GeoJSON circle layer and country drill-down panel (completed 2026-03-25)
 - [x] **Phase 5: Global Stats and Search** - Sidebar analytics dashboard, diversity score, and pg_trgm fuzzy search with map navigation (completed 2026-03-25)
-- [ ] **Phase 6: AI Chat** - Claude-powered natural language chat panel with RAG context, Redis caching, and query logging
+- [x] **Phase 6: AI Chat** - Claude-powered natural language chat panel with RAG context, Redis caching, and query logging (completed 2026-03-25)
 
 ## Phase Details
 
@@ -119,8 +119,8 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 06-01-PLAN.md — AI chat backend: Redis client, AIService with Claude API + RAG context + caching + query logging
-- [ ] 06-02-PLAN.md — AI chat frontend: AIChatPanel component with toggle, suggestion chips, conversation, wired to HomeClient
+- [x] 06-01-PLAN.md — AI chat backend: Redis client, AIService with Claude API + RAG context + caching + query logging
+- [x] 06-02-PLAN.md — AI chat frontend: AIChatPanel component with toggle, suggestion chips, conversation, wired to HomeClient
 
 ## Progress
 
@@ -134,4 +134,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 | 3. Backend API | 4/4 | Complete | 2026-03-24 |
 | 4. Map View and Country Detail | 3/3 | Complete | 2026-03-25 |
 | 5. Global Stats and Search | 2/2 | Complete | 2026-03-25 |
-| 6. AI Chat | 0/2 | Not started | - |
+| 6. AI Chat | 2/2 | Complete | 2026-03-25 |
