@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-03-24)
 ## Current Position
 
 Phase: 4 of 6 (Map View and Country Detail) — In progress
-Plan: 1 of 3 in phase 4 — COMPLETE
-Status: Phase 4 Plan 01 complete — ready for Plan 02 (Country Detail Panel)
-Last activity: 2026-03-24 — Completed 04-01 (Mapbox map foundation + backend schema extensions)
+Plan: 2 of 3 in phase 4 — COMPLETE
+Status: Phase 4 Plan 02 complete — ready for Plan 03 (CountryPanel artist list, genre chart, audio features)
+Last activity: 2026-03-25 — Completed 04-02 (hover tooltips, click-to-fly, CountryPanel shell, HomeClient)
 
-Progress: [████████░░] 57% (8/14 plans complete)
+Progress: [█████████░] 64% (9/14 plans complete)
 
 ## Performance Metrics
 
@@ -30,10 +30,10 @@ Progress: [████████░░] 57% (8/14 plans complete)
 | 01-infrastructure | 3/3 | ~60min | 20min |
 | 02-data-enrichment | 3/3 | ~103min | 34min |
 | 03-backend-api | 4/4 | ~26min | ~6min |
-| 04-map-view | 1/3 | ~18min | ~18min |
+| 04-map-view | 2/3 | ~21min | ~10min |
 
 **Recent Trend:**
-- Last 5 plans: 02-03 (3min), 03-01 (<5min), 03-03 (<5min), 03-04 (2min), 04-01 (~18min)
+- Last 5 plans: 03-01 (<5min), 03-03 (<5min), 03-04 (2min), 04-01 (~18min), 04-02 (~3min)
 - Trend: on track
 
 *Updated after each plan completion*
@@ -84,6 +84,9 @@ Recent decisions affecting current work:
 - [04-01]: page.tsx wraps fetchCountries in try/catch — map renders with empty array on build-time or backend-offline scenarios
 - [04-01]: seed_countries.py uses ON CONFLICT DO UPDATE SET region=EXCLUDED.region — re-runs populate region for existing rows
 - [04-01]: Alembic migration 002 must be run inside Docker: `docker compose exec backend alembic upgrade head`
+- [04-02]: Access Mapbox GeoJSONFeature.properties via direct `as CountryFeatureProperties` cast — direct Feature<Point, T> cast fails TypeScript due to GeoJsonProperties type; properties-only cast is the idiomatic workaround
+- [04-02]: dynamic(..., { ssr: false }) must be in a client component — moved from page.tsx (server) to HomeClient.tsx (client)
+- [04-02]: CountryPanel fetches its own data (decoupled) — MapView only emits countryId via onCountrySelect; panel runs useEffect on countryId dep
 
 ### Pending Todos
 
@@ -100,6 +103,6 @@ Recent decisions affecting current work:
 
 ## Session Continuity
 
-Last session: 2026-03-24
-Stopped at: Phase 4 Plan 01 COMPLETE — ready to begin Phase 4 Plan 02 (Country Detail Panel)
-Resume file: .planning/phases/04-map-view-and-country-detail/04-02-PLAN.md
+Last session: 2026-03-25
+Stopped at: Phase 4 Plan 02 COMPLETE — ready to begin Phase 4 Plan 03 (CountryPanel full content: artist list, genre chart, audio features, top tracks)
+Resume file: .planning/phases/04-map-view-and-country-detail/04-03-PLAN.md
