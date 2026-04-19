@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { X } from 'lucide-react';
+import { X, Maximize2, Minimize2 } from 'lucide-react';
 import { askAI, fetchAISuggestions, AISuggestion } from '@/lib/api';
 
 interface Message {
@@ -18,6 +18,7 @@ export default function AIChatPanel({ onClose }: AIChatPanelProps) {
   const [suggestions, setSuggestions] = useState<AISuggestion[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -58,17 +59,26 @@ export default function AIChatPanel({ onClose }: AIChatPanelProps) {
   }
 
   return (
-    <div className="fixed bottom-4 right-4 w-96 h-[580px] z-50 flex flex-col rounded-xl shadow-2xl border border-gray-700 overflow-hidden bg-gray-900 text-white">
+    <div className={`fixed z-50 flex flex-col rounded-xl shadow-2xl border border-gray-700 overflow-hidden bg-gray-900 text-white transition-all duration-200 ${isExpanded ? 'inset-4' : 'bottom-4 right-4 w-96 h-[580px]'}`}>
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-gray-700 bg-gray-800 shrink-0">
         <span className="font-semibold text-sm">Ask AI</span>
-        <button
-          onClick={onClose}
-          className="text-gray-400 hover:text-white transition-colors p-1 rounded"
-          aria-label="Close chat"
-        >
-          <X size={16} />
-        </button>
+        <div className="flex items-center gap-1">
+          <button
+            onClick={() => setIsExpanded((prev) => !prev)}
+            className="text-gray-400 hover:text-white transition-colors p-1 rounded"
+            aria-label={isExpanded ? 'Collapse chat' : 'Expand chat'}
+          >
+            {isExpanded ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
+          </button>
+          <button
+            onClick={onClose}
+            className="text-gray-400 hover:text-white transition-colors p-1 rounded"
+            aria-label="Close chat"
+          >
+            <X size={16} />
+          </button>
+        </div>
       </div>
 
       {/* Messages area */}
