@@ -157,6 +157,18 @@ export default function MapView({ countries, onCountrySelect, flyToTarget, onFly
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (!map.current) return;
+    const m = map.current;
+    const data = toGeoJSON(countries);
+    const apply = () => {
+      const src = m.getSource('countries') as mapboxgl.GeoJSONSource | undefined;
+      if (src) src.setData(data);
+    };
+    if (m.isStyleLoaded() && m.getSource('countries')) apply();
+    else m.once('load', apply);
+  }, [countries]);
+
   // Fly to a target when flyToTarget prop changes
   useEffect(() => {
     if (!flyToTarget || !map.current) return;
