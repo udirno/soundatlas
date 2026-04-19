@@ -11,8 +11,9 @@ Requirements for v1.1 Polish & Deploy. Each maps to roadmap phases.
 
 - [ ] **UI-01**: All text properly contained within its parent containers (no overflow/clipping)
 - [ ] **UI-02**: StatsSidebar visually refined — clean spacing, typography hierarchy, polished metrics cards
-- [ ] **UI-03**: CountryPanel visually refined — better section spacing, artist rows, genre chart labels
+- [ ] **UI-03**: CountryPanel visually refined — better section spacing, artist rows, genre chart labels not clipped
 - [ ] **UI-04**: Pie chart labels don't overlap on small slices
+- [ ] **UI-08**: Top tracks display shows correct distinct info per line (no duplicate track name as album text)
 - [ ] **UI-05**: SearchBar dropdown styled consistently with overall polish level
 - [ ] **UI-06**: Map tooltip styling refined (spacing, typography, visual hierarchy)
 - [ ] **UI-07**: Overall visual consistency — unified spacing, borders, shadows, and transitions across all panels
@@ -68,29 +69,30 @@ Deferred to future milestone. Tracked but not in current roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| UI-01 | — | Pending |
-| UI-02 | — | Pending |
-| UI-03 | — | Pending |
-| UI-04 | — | Pending |
-| UI-05 | — | Pending |
-| UI-06 | — | Pending |
-| UI-07 | — | Pending |
-| AF-01 | — | Pending |
-| AF-02 | — | Pending |
-| DIV-01 | — | Pending |
-| DIV-02 | — | Pending |
-| CHAT-01 | — | Pending |
-| CHAT-02 | — | Pending |
-| DEPLOY-01 | — | Pending |
-| DEPLOY-02 | — | Pending |
-| DEPLOY-03 | — | Pending |
-| DEPLOY-04 | — | Pending |
+| UI-01 | Phase 7 | Pending |
+| UI-02 | Phase 7 | Pending |
+| UI-03 | Phase 7 | Pending |
+| UI-04 | Phase 7 | Pending |
+| UI-05 | Phase 7 | Pending |
+| UI-06 | Phase 7 | Pending |
+| UI-07 | Phase 7 | Pending |
+| UI-08 | Phase 7 | Pending |
+| AF-01 | Phase 8 | Pending |
+| AF-02 | Phase 8 | Pending |
+| DIV-01 | Phase 8 | Pending |
+| DIV-02 | Phase 8 | Pending |
+| CHAT-01 | Phase 8 | Pending |
+| CHAT-02 | Phase 8 | Pending |
+| DEPLOY-01 | Phase 9 | Pending |
+| DEPLOY-02 | Phase 9 | Pending |
+| DEPLOY-03 | Phase 9 | Pending |
+| DEPLOY-04 | Phase 9 | Pending |
 
 **Coverage:**
-- v1.1 requirements: 17 total
-- Mapped to phases: 0
-- Unmapped: 17 ⚠️
+- v1.1 requirements: 18 total
+- Mapped to phases: 18
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-04-18*
-*Last updated: 2026-04-18 after initial definition*
+*Last updated: 2026-04-18 after v1.1 roadmap creation*
