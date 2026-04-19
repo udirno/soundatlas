@@ -87,16 +87,16 @@ export default function MapView({ countries, onCountrySelect, flyToTarget, onFly
         type: 'circle',
         source: 'countries',
         paint: {
-          // Radius proportional to sqrt(track_count): sqrt scaling keeps large countries visible
-          // without completely overwhelming small ones
           'circle-radius': [
-            'interpolate',
-            ['linear'],
-            ['sqrt', ['get', 'track_count']],
-            0, 4,
-            Math.sqrt(50), 12,
-            Math.sqrt(100), 20,
-            Math.sqrt(500), 36,
+            'step', ['get', 'track_count'],
+            4,
+            10, 6,
+            50, 10,
+            150, 14,
+            500, 18,
+            1500, 22,
+            3000, 26,
+            5000, 30,
           ],
           'circle-color': ['get', 'genre_color'],
           'circle-opacity': 0.85,
