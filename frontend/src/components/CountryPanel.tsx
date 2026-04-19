@@ -241,7 +241,7 @@ export default function CountryPanel({ countryId, onClose }: CountryPanelProps) 
                       <span className="text-gray-100 text-sm font-medium leading-snug">
                         {track.name}
                       </span>
-                      {track.album_name && (
+                      {track.album_name && track.album_name !== track.name && (
                         <span className="text-gray-400 text-xs mt-0.5">
                           {track.album_name}
                         </span>

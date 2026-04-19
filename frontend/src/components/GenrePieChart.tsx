@@ -10,6 +10,29 @@ import {
 } from 'recharts';
 import { getGenreColor } from '@/lib/colors';
 
+const RADIAN = Math.PI / 180;
+const MIN_LABEL_PERCENT = 0.05;
+
+function renderLabel(props: PieLabelRenderProps): JSX.Element | null {
+  const { cx, cy, midAngle, outerRadius, name, percent } = props;
+  if ((percent as number) < MIN_LABEL_PERCENT) return null;
+  const radius = (outerRadius as number) + 20;
+  const x = (cx as number) + radius * Math.cos(-(midAngle as number) * RADIAN);
+  const y = (cy as number) + radius * Math.sin(-(midAngle as number) * RADIAN);
+  return (
+    <text
+      x={x}
+      y={y}
+      fill="#9ca3af"
+      fontSize={11}
+      dominantBaseline="central"
+      textAnchor={x > (cx as number) ? 'start' : 'end'}
+    >
+      {name as string}
+    </text>
+  );
+}
+
 interface GenrePieChartProps {
   data: Record<string, number>;
 }
@@ -61,9 +84,7 @@ export default function GenrePieChart({ data }: GenrePieChartProps) {
           cx="50%"
           cy="50%"
           outerRadius={80}
-          label={({ name, percent }: PieLabelRenderProps) =>
-            `${name ?? ''} ${(((percent as number) ?? 0) * 100).toFixed(0)}%`
-          }
+          label={renderLabel}
           labelLine={false}
         >
           {chartData.map((entry, i) => (

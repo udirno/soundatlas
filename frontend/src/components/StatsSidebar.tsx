@@ -38,7 +38,7 @@ export default function StatsSidebar({ onCountrySelect }: StatsSidebarProps) {
     <aside className="fixed top-0 left-0 h-screen w-72 bg-gray-950/95 backdrop-blur-sm border-r border-gray-800 z-40 overflow-y-auto">
       <div className="p-5">
         {/* Header */}
-        <h2 className="text-white font-semibold text-base tracking-wide mb-5 uppercase text-xs letter-spacing-wider text-gray-400">
+        <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-5">
           Library Stats
         </h2>
 
