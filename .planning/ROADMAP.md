@@ -41,10 +41,10 @@
   4. Pie chart slices never show overlapping labels, even for small slices
   5. SearchBar dropdown, map tooltips, and panel borders share a unified visual style
   6. Top tracks show correct distinct data per line (track name and album name, not duplicated)
-**Plans:** TBD
+**Plans:** 1 plan
 
 Plans:
-- [ ] 07-01: Visual polish pass — text containment, spacing, typography, borders
+- [ ] 07-01-PLAN.md — Fix class conflicts, pie label overlap, top tracks dedup, tooltip hierarchy, search focus ring
 
 ---
 
@@ -95,6 +95,6 @@ Plans:
 | 4. Map View | v1.0 | 3/3 | Complete | 2026-03-25 |
 | 5. Stats and Search | v1.0 | 2/2 | Complete | 2026-03-25 |
 | 6. AI Chat | v1.0 | 2/2 | Complete | 2026-03-25 |
-| 7. Visual Polish | v1.1 | 0/TBD | Not started | — |
+| 7. Visual Polish | v1.1 | 0/1 | Not started | — |
 | 8. Feature Polish | v1.1 | 0/TBD | Not started | — |
 | 9. Production Deployment | v1.1 | 0/TBD | Not started | — |
