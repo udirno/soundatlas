@@ -88,35 +88,42 @@ export default function StatsSidebar({ onCountrySelect }: StatsSidebarProps) {
               </div>
             )}
 
-            {/* Diversity Score */}
-            <div className="mb-6">
-              <div className="text-gray-500 text-xs uppercase tracking-wider mb-2">Geographic Diversity</div>
-              <div className="flex items-baseline gap-2">
-                <span className={`text-2xl font-bold ${diversityColor}`}>
-                  {diversityDisplay}
-                </span>
-                <span className="text-gray-600 text-sm">/ 10</span>
-              </div>
-              <div className="mt-2 h-1.5 bg-gray-800 rounded-full overflow-hidden">
-                <div
-                  className={`h-full rounded-full transition-all duration-700 ${
-                    parseFloat(diversityDisplay ?? '0') >= 7
-                      ? 'bg-green-400'
-                      : parseFloat(diversityDisplay ?? '0') >= 4
-                        ? 'bg-yellow-400'
-                        : 'bg-red-400'
-                  }`}
-                  style={{ width: diversityBarWidth }}
-                />
-              </div>
-              <p className="text-gray-600 text-[10px] mt-2 leading-relaxed">
-                {parseFloat(diversityDisplay ?? '0') >= 7
-                  ? 'Your library spans a wide range of countries — highly diverse!'
-                  : parseFloat(diversityDisplay ?? '0') >= 4
-                    ? `Your music comes from ${stats.country_count} countries. Explore beyond your top regions to increase this.`
-                    : 'Most of your music is concentrated in a few countries.'}
-              </p>
-            </div>
+            {/* Geographic Diversity */}
+            {(() => {
+              const topCountry = stats.top_countries[0];
+              const totalMapped = stats.top_countries.reduce((sum, c) => sum + c.artist_count, 0);
+              const topPct = topCountry ? Math.round((topCountry.artist_count / totalMapped) * 100) : 0;
+              return (
+                <div className="mb-6">
+                  <div className="text-gray-500 text-xs uppercase tracking-wider mb-2">Geographic Spread</div>
+                  <div className="flex items-baseline gap-2">
+                    <span className={`text-2xl font-bold ${diversityColor}`}>
+                      {diversityDisplay}
+                    </span>
+                    <span className="text-gray-600 text-sm">/ 10</span>
+                  </div>
+                  <div className="mt-2 h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                    <div
+                      className={`h-full rounded-full transition-all duration-700 ${
+                        parseFloat(diversityDisplay ?? '0') >= 7
+                          ? 'bg-green-400'
+                          : parseFloat(diversityDisplay ?? '0') >= 4
+                            ? 'bg-yellow-400'
+                            : 'bg-red-400'
+                      }`}
+                      style={{ width: diversityBarWidth }}
+                    />
+                  </div>
+                  <p className="text-gray-600 text-[10px] mt-2 leading-relaxed">
+                    {topPct >= 50
+                      ? `${topPct}% of your artists are from ${topCountry.name}. A score of 10 would mean artists are evenly spread across all ${stats.country_count} countries.`
+                      : parseFloat(diversityDisplay ?? '0') >= 7
+                        ? `Artists spread fairly evenly across ${stats.country_count} countries.`
+                        : `${topCountry.name} leads at ${topPct}%. A higher score means a more even spread across ${stats.country_count} countries.`}
+                  </p>
+                </div>
+              );
+            })()}
 
             {/* Top 5 Countries */}
             <div>
