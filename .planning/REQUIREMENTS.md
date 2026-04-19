@@ -30,8 +30,8 @@ Requirements for v1.1 Polish & Deploy. Each maps to roadmap phases.
 
 ### AI Chat
 
-- [ ] **CHAT-01**: AI chat panel can be expanded to a larger/fullscreen view
-- [ ] **CHAT-02**: Expanded chat view is easy to dismiss back to the sidebar size
+- [x] **CHAT-01**: AI chat panel can be expanded to a larger/fullscreen view
+- [x] **CHAT-02**: Expanded chat view is easy to dismiss back to the sidebar size
 
 ### Deployment
 
@@ -81,8 +81,8 @@ Deferred to future milestone. Tracked but not in current roadmap.
 | AF-02 | Phase 7 | Complete |
 | DIV-01 | Phase 7 | Complete |
 | DIV-02 | Phase 7 | Complete |
-| CHAT-01 | Phase 8 | Pending |
-| CHAT-02 | Phase 8 | Pending |
+| CHAT-01 | Phase 8 | Complete |
+| CHAT-02 | Phase 8 | Complete |
 | DEPLOY-01 | Phase 9 | Pending |
 | DEPLOY-02 | Phase 9 | Pending |
 | DEPLOY-03 | Phase 9 | Pending |

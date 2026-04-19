@@ -24,7 +24,7 @@
 **Milestone Goal:** Fix UX rough edges and deploy to production so friends can view the map.
 
 - [x] **Phase 7: Visual Polish** — All UI panels clean + audio features/diversity score fixed — completed 2026-04-18
-- [ ] **Phase 8: Feature Polish** — Chat panel expand/collapse (AF + DIV requirements completed in Phase 7)
+- [x] **Phase 8: Feature Polish** — Chat panel expand/collapse — completed 2026-04-18
 - [ ] **Phase 9: Production Deployment** — App live on Vercel and Railway
 
 ---
@@ -59,7 +59,7 @@ Plans:
 **Plans:** 1 plan
 
 Plans:
-- [ ] 08-01-PLAN.md — Add expand/collapse toggle to AI chat panel
+- [x] 08-01-PLAN.md — Add expand/collapse toggle to AI chat panel
 
 ---
 
@@ -92,5 +92,5 @@ Plans:
 | 5. Stats and Search | v1.0 | 2/2 | Complete | 2026-03-25 |
 | 6. AI Chat | v1.0 | 2/2 | Complete | 2026-03-25 |
 | 7. Visual Polish | v1.1 | 1/1 | Complete | 2026-04-18 |
-| 8. Feature Polish | v1.1 | 0/1 | Not started | — |
+| 8. Feature Polish | v1.1 | 1/1 | Complete | 2026-04-18 |
 | 9. Production Deployment | v1.1 | 0/TBD | Not started | — |
