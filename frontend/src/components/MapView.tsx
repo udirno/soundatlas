@@ -117,7 +117,10 @@ export default function MapView({ countries, onCountrySelect, flyToTarget, onFly
         const coordinates = (rawFeature.geometry as GeoJSON.Point).coordinates as [number, number];
 
         const topGenre = props.top_genre ?? 'Unknown';
-        const html = `<strong>${props.name}</strong><br/>${props.artist_count} artists &middot; ${topGenre}`;
+        const html = `
+          <div style="font-weight:600;font-size:13px;margin-bottom:3px;color:#f1f5f9">${props.name}</div>
+          <div style="font-size:11px;color:#94a3b8">${props.artist_count} artists &middot; ${topGenre}</div>
+        `;
 
         tooltip.setLngLat(coordinates).setHTML(html).addTo(map.current);
       });
