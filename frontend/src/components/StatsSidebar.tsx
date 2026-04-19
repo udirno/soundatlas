@@ -115,11 +115,7 @@ export default function StatsSidebar({ onCountrySelect }: StatsSidebarProps) {
                     />
                   </div>
                   <p className="text-gray-600 text-[10px] mt-2 leading-relaxed">
-                    {topPct >= 50
-                      ? `${topPct}% of your artists are from ${topCountry.name}. A score of 10 would mean artists are evenly spread across all ${stats.country_count} countries.`
-                      : parseFloat(diversityDisplay ?? '0') >= 7
-                        ? `Artists spread fairly evenly across ${stats.country_count} countries.`
-                        : `${topCountry.name} leads at ${topPct}%. A higher score means a more even spread across ${stats.country_count} countries.`}
+                    Measures how evenly your artists are distributed across countries. 10 = perfectly even, 0 = all from one place.
                   </p>
                 </div>
               );
