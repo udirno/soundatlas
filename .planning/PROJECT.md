@@ -24,7 +24,16 @@ The interactive world map that instantly reveals the geographic diversity of a m
 
 ### Active
 
-- [ ] Manual re-sync capability to update with new liked songs (v2)
+- [ ] Audio features section conditionally shown (visible when data exists, hidden when unavailable)
+- [ ] Diversity score redesigned with meaningful context and friendlier presentation
+- [ ] AI chat panel expandable/fullscreen mode for better readability
+- [ ] Production deployment (frontend on Vercel, backend + DB on Railway)
+
+### Deferred (v2.0+)
+
+- [ ] Spotify OAuth login — let anyone connect and generate their own map
+- [ ] Multi-user support with persistent accounts and per-user data isolation
+- [ ] Manual re-sync capability to update with new liked songs
 
 ### Out of Scope
 
@@ -33,7 +42,7 @@ The interactive world map that instantly reveals the geographic diversity of a m
 - Real-time streaming history integration — library (liked songs) only
 - Mobile app — web-first
 - Lyric search tab (ChromaDB/LyricLens) — P2 priority, deferred unless time allows
-- Multi-user support — single-user personal tool
+- Multi-user support — deferred to v2.0, polish and deploy single-user first
 
 ## Context
 
@@ -93,4 +102,15 @@ The interactive world map that instantly reveals the geographic diversity of a m
 | AsyncAnthropic client | Backend fully async; sync client would block the event loop | Good |
 
 ---
-*Last updated: 2026-03-25 after v1.0 milestone*
+## Current Milestone: v1.1 Polish & Deploy
+
+**Goal:** Fix UX rough edges (audio features, diversity score, chat panel) and deploy to production so friends can view the map.
+
+**Target features:**
+- Conditional audio features display (show when available, hide when not)
+- Redesigned diversity score with meaningful context
+- Expandable AI chat panel
+- Production deployment (Vercel + Railway)
+
+---
+*Last updated: 2026-04-18 after v1.1 milestone start*
