@@ -58,23 +58,23 @@ export default function StatsSidebar({ onCountrySelect }: StatsSidebarProps) {
           <>
             {/* Key Metrics */}
             <div className="grid grid-cols-3 gap-2 mb-6">
-              <div className="bg-gray-900 rounded-lg p-3 text-center">
-                <div className="text-white font-bold text-lg leading-none">
+              <div className="bg-gray-900 rounded-lg p-2.5 text-center">
+                <div className="text-white font-bold text-sm leading-none">
                   {stats.country_count}
                 </div>
-                <div className="text-gray-500 text-xs mt-1">Countries</div>
+                <div className="text-gray-500 text-[10px] mt-1.5 leading-none">Countries</div>
               </div>
-              <div className="bg-gray-900 rounded-lg p-3 text-center">
-                <div className="text-white font-bold text-lg leading-none">
+              <div className="bg-gray-900 rounded-lg p-2.5 text-center">
+                <div className="text-white font-bold text-sm leading-none">
                   {stats.artist_count.toLocaleString()}
                 </div>
-                <div className="text-gray-500 text-xs mt-1">Artists</div>
+                <div className="text-gray-500 text-[10px] mt-1.5 leading-none">Artists</div>
               </div>
-              <div className="bg-gray-900 rounded-lg p-3 text-center">
-                <div className="text-white font-bold text-lg leading-none">
+              <div className="bg-gray-900 rounded-lg p-2.5 text-center">
+                <div className="text-white font-bold text-sm leading-none">
                   {stats.track_count.toLocaleString()}
                 </div>
-                <div className="text-gray-500 text-xs mt-1">Tracks</div>
+                <div className="text-gray-500 text-[10px] mt-1.5 leading-none">Tracks</div>
               </div>
             </div>
 
@@ -90,8 +90,8 @@ export default function StatsSidebar({ onCountrySelect }: StatsSidebarProps) {
 
             {/* Diversity Score */}
             <div className="mb-6">
-              <div className="text-gray-500 text-xs uppercase tracking-wider mb-2">Diversity Score</div>
-              <div className="flex items-center gap-2">
+              <div className="text-gray-500 text-xs uppercase tracking-wider mb-2">Geographic Diversity</div>
+              <div className="flex items-baseline gap-2">
                 <span className={`text-2xl font-bold ${diversityColor}`}>
                   {diversityDisplay}
                 </span>
@@ -109,6 +109,13 @@ export default function StatsSidebar({ onCountrySelect }: StatsSidebarProps) {
                   style={{ width: diversityBarWidth }}
                 />
               </div>
+              <p className="text-gray-600 text-[10px] mt-2 leading-relaxed">
+                {parseFloat(diversityDisplay ?? '0') >= 7
+                  ? 'Your library spans a wide range of countries — highly diverse!'
+                  : parseFloat(diversityDisplay ?? '0') >= 4
+                    ? `Your music comes from ${stats.country_count} countries. Explore beyond your top regions to increase this.`
+                    : 'Most of your music is concentrated in a few countries.'}
+              </p>
             </div>
 
             {/* Top 5 Countries */}

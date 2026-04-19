@@ -24,7 +24,7 @@ function renderLabel(props: PieLabelRenderProps): JSX.Element | null {
       x={x}
       y={y}
       fill="#9ca3af"
-      fontSize={11}
+      fontSize={12}
       dominantBaseline="central"
       textAnchor={x > (cx as number) ? 'start' : 'end'}
     >
@@ -75,7 +75,7 @@ export default function GenrePieChart({ data }: GenrePieChartProps) {
   }
 
   return (
-    <ResponsiveContainer width="100%" height={220}>
+    <ResponsiveContainer width="100%" height={260}>
       <PieChart>
         <Pie
           data={chartData}

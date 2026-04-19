@@ -6,6 +6,14 @@ import { fetchCountryDetail, fetchCountryComparison } from '@/lib/api';
 import GenrePieChart from '@/components/GenrePieChart';
 import AudioFeatureChart from '@/components/AudioFeatureChart';
 
+const AUDIO_FEATURES = ['energy', 'danceability', 'valence', 'acousticness'];
+
+function hasAudioData(comparison: CountryComparison): boolean {
+  return AUDIO_FEATURES.some(
+    (f) => comparison.country_averages[f] !== null && comparison.country_averages[f] !== undefined
+  );
+}
+
 interface CountryPanelProps {
   countryId: number;
   onClose: () => void;
@@ -210,22 +218,18 @@ export default function CountryPanel({ countryId, onClose }: CountryPanelProps) 
               <GenrePieChart data={countryDetail.genre_breakdown} />
             </section>
 
-            {/* ---- Audio Features (CTRY-04) ---- */}
-            <section className="border-t border-gray-800 pt-4 mt-4">
-              <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-3">
-                Audio Features
-              </h3>
-              {comparison ? (
+            {/* ---- Audio Features (CTRY-04) — hidden when no data ---- */}
+            {comparison && hasAudioData(comparison) && (
+              <section className="border-t border-gray-800 pt-4 mt-4">
+                <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-3">
+                  Audio Features
+                </h3>
                 <AudioFeatureChart
                   countryAverages={comparison.country_averages}
                   globalAverages={comparison.global_averages}
                 />
-              ) : (
-                <div className="flex items-center justify-center h-16 text-gray-500 text-sm">
-                  Loading audio features...
-                </div>
-              )}
-            </section>
+              </section>
+            )}
 
             {/* ---- Top Tracks (CTRY-05) ---- */}
             <section className="border-t border-gray-800 pt-4 mt-4">
