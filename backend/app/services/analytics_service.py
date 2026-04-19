@@ -30,7 +30,9 @@ def calculate_diversity_score(country_artist_counts: list[int]) -> float:
 async def get_dashboard_stats(db: AsyncSession) -> dict:
     """Return global counts, diversity score, top genres, top countries."""
     # Query 1: Global counts — separate queries to avoid undercounting unmapped artists/tracks
-    country_count = (await db.execute(select(func.count(Country.id)))).scalar_one()
+    country_count = (await db.execute(
+        select(func.count(func.distinct(Artist.country_id))).where(Artist.country_id.is_not(None))
+    )).scalar_one()
     artist_count = (await db.execute(select(func.count(Artist.id)))).scalar_one()
     track_count = (await db.execute(select(func.count(Track.id)))).scalar_one()
 
