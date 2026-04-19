@@ -50,20 +50,16 @@ Plans:
 
 ### Phase 8: Feature Polish
 
-**Goal:** Audio features display conditionally, diversity score communicates meaning, and chat panel is expandable
+**Goal:** Chat panel is expandable to a larger/fullscreen view and can be collapsed back
 **Depends on:** Phase 7
 **Requirements:** CHAT-01, CHAT-02 (AF-01, AF-02, DIV-01, DIV-02 completed in Phase 7)
 **Success Criteria** (what must be TRUE):
-  1. Selecting a country with no audio feature data shows no audio features section — the section is absent, not a placeholder
-  2. Selecting a country with audio feature data shows the radar chart with correct values and no error state
-  3. Diversity score includes a label or description explaining what it measures and what a high or low score means
-  4. Chat panel has an expand control that opens it to a larger or fullscreen view for comfortable reading
-  5. Expanded chat view has a visible close/collapse control that returns it to its default sidebar size
-**Plans:** TBD
+  1. Chat panel has an expand control that opens it to a larger or fullscreen view for comfortable reading
+  2. Expanded chat view has a visible close/collapse control that returns it to its default sidebar size
+**Plans:** 1 plan
 
 Plans:
-- [ ] 08-01: Audio features conditional rendering and diversity score redesign
-- [ ] 08-02: AI chat panel expand/collapse implementation
+- [ ] 08-01-PLAN.md — Add expand/collapse toggle to AI chat panel
 
 ---
 
@@ -96,5 +92,5 @@ Plans:
 | 5. Stats and Search | v1.0 | 2/2 | Complete | 2026-03-25 |
 | 6. AI Chat | v1.0 | 2/2 | Complete | 2026-03-25 |
 | 7. Visual Polish | v1.1 | 1/1 | Complete | 2026-04-18 |
-| 8. Feature Polish | v1.1 | 0/TBD | Not started | — |
+| 8. Feature Polish | v1.1 | 0/1 | Not started | — |
 | 9. Production Deployment | v1.1 | 0/TBD | Not started | — |
