@@ -1,9 +1,17 @@
 from typing import List
 from pydantic_settings import BaseSettings
+from pydantic import field_validator
 
 
 class Settings(BaseSettings):
     DATABASE_URL: str = "postgresql+asyncpg://soundatlas_user:soundatlas_password@localhost:5432/soundatlas_db"
+
+    @field_validator("DATABASE_URL", mode="after")
+    @classmethod
+    def fix_async_url(cls, v: str) -> str:
+        if v.startswith("postgresql://"):
+            return v.replace("postgresql://", "postgresql+asyncpg://", 1)
+        return v
     REDIS_URL: str = "redis://localhost:6379"
     SPOTIFY_CLIENT_ID: str = ""
     SPOTIFY_CLIENT_SECRET: str = ""
