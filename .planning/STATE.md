@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-04-18)
 
 **Core value:** Interactive world map that instantly reveals the geographic diversity of a music library — every artist mapped to their origin country
-**Current focus:** Phase 7 — Visual Polish (v1.1)
+**Current focus:** Phase 8 — Feature Polish (v1.1)
 
 ## Current Position
 
-Phase: 7 of 9 (Visual Polish)
-Plan: 1 of TBD in current phase
-Status: In progress
-Last activity: 2026-04-19 — Completed 07-01-PLAN.md (UI polish: 5 components, 8 requirements)
+Phase: 8 of 9 (Feature Polish)
+Plan: 0 of TBD in current phase
+Status: Phase 7 complete, ready to plan Phase 8
+Last activity: 2026-04-18 — Phase 7 completed (UI polish + audio features + diversity score)
 
-Progress: [██████████░░░░░░░░░░░░░░░░░░░░] 35% (6/17 v1.0 plans complete; v1.1 plan 07-01 complete)
+Progress: [████████████████████░░░░░░░░░░] 67% (12/18 requirements complete)
 
 ## Performance Metrics
 
@@ -26,20 +26,18 @@ Progress: [██████████░░░░░░░░░░░░░
 - LOC: 2,912 (Python + TypeScript)
 
 **v1.1 Milestone:**
-- Total plans completed: 1 (07-01)
-- Plans remaining: TBD
+- Phase 7: Complete (1 plan + direct fixes)
+- Requirements completed: 12/18
 
 ## Accumulated Context
 
 ### Decisions
 
-Decisions logged in PROJECT.md Key Decisions table.
-
-- v1.1 scope: Audio features conditionally shown, diversity score redesigned, chat expandable, deploy to Vercel + Railway
-- Audio features graceful degradation designed in from Phase 1 (nullable columns) — frontend condition is the remaining gap
-- 07-01: Mapbox tooltip HTML uses inline styles (not Tailwind) — Tailwind classes unavailable inside popup.setHTML
-- 07-01: Pie chart label suppression threshold set at 5% (MIN_LABEL_PERCENT=0.05)
-- 07-01: Section header pattern established: text-xs font-semibold text-gray-400 uppercase tracking-wider
+- AF-01, AF-02, DIV-01, DIV-02 pulled from Phase 8 into Phase 7 — fixed alongside UI polish
+- Phase 8 now only has CHAT-01 and CHAT-02 remaining
+- Mapbox tooltip HTML uses inline styles (not Tailwind) — Tailwind classes unavailable inside popup.setHTML
+- Pie chart label suppression threshold set at 5% (MIN_LABEL_PERCENT=0.05)
+- Section header pattern: text-xs font-semibold text-gray-400 uppercase tracking-wider
 
 ### Pending Todos
 
@@ -47,10 +45,10 @@ None.
 
 ### Blockers/Concerns
 
-None identified yet. Railway and Vercel deployments are straightforward given existing Docker Compose setup.
+None.
 
 ## Session Continuity
 
-Last session: 2026-04-19
-Stopped at: Completed 07-01 (UI visual polish — 5 components)
-Resume file: .planning/phases/07-visual-polish/07-01-SUMMARY.md
+Last session: 2026-04-18
+Stopped at: Phase 7 complete
+Resume: /gsd:plan-phase 8

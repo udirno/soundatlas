@@ -23,8 +23,8 @@
 
 **Milestone Goal:** Fix UX rough edges and deploy to production so friends can view the map.
 
-- [ ] **Phase 7: Visual Polish** — All UI panels look clean and consistent
-- [ ] **Phase 8: Feature Polish** — Audio features, diversity score, and chat panel work correctly
+- [x] **Phase 7: Visual Polish** — All UI panels clean + audio features/diversity score fixed — completed 2026-04-18
+- [ ] **Phase 8: Feature Polish** — Chat panel expand/collapse (AF + DIV requirements completed in Phase 7)
 - [ ] **Phase 9: Production Deployment** — App live on Vercel and Railway
 
 ---
@@ -52,7 +52,7 @@ Plans:
 
 **Goal:** Audio features display conditionally, diversity score communicates meaning, and chat panel is expandable
 **Depends on:** Phase 7
-**Requirements:** AF-01, AF-02, DIV-01, DIV-02, CHAT-01, CHAT-02
+**Requirements:** CHAT-01, CHAT-02 (AF-01, AF-02, DIV-01, DIV-02 completed in Phase 7)
 **Success Criteria** (what must be TRUE):
   1. Selecting a country with no audio feature data shows no audio features section — the section is absent, not a placeholder
   2. Selecting a country with audio feature data shows the radar chart with correct values and no error state
@@ -95,6 +95,6 @@ Plans:
 | 4. Map View | v1.0 | 3/3 | Complete | 2026-03-25 |
 | 5. Stats and Search | v1.0 | 2/2 | Complete | 2026-03-25 |
 | 6. AI Chat | v1.0 | 2/2 | Complete | 2026-03-25 |
-| 7. Visual Polish | v1.1 | 0/1 | Not started | — |
+| 7. Visual Polish | v1.1 | 1/1 | Complete | 2026-04-18 |
 | 8. Feature Polish | v1.1 | 0/TBD | Not started | — |
 | 9. Production Deployment | v1.1 | 0/TBD | Not started | — |
