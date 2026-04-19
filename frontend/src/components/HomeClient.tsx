@@ -1,28 +1,31 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { MessageSquare } from 'lucide-react';
+import { fetchCountries } from '@/lib/api';
 import type { CountryListItem } from '@/lib/api';
 import CountryPanel from './CountryPanel';
 import StatsSidebar from './StatsSidebar';
 import SearchBar from './SearchBar';
 import AIChatPanel from './AIChatPanel';
 
-// Dynamic import with ssr:false must be in a client component context
 const MapView = dynamic(() => import('@/components/MapView'), {
   ssr: false,
   loading: () => <div className="w-full h-screen bg-gray-950" />,
 });
 
-interface HomeClientProps {
-  countries: CountryListItem[];
-}
-
-export default function HomeClient({ countries }: HomeClientProps) {
+export default function HomeClient() {
+  const [countries, setCountries] = useState<CountryListItem[]>([]);
   const [selectedCountryId, setSelectedCountryId] = useState<number | null>(null);
   const [flyToTarget, setFlyToTarget] = useState<{ lng: number; lat: number } | null>(null);
   const [isChatOpen, setIsChatOpen] = useState(false);
+
+  useEffect(() => {
+    fetchCountries()
+      .then(setCountries)
+      .catch((err) => console.error('Failed to fetch countries:', err));
+  }, []);
 
   const handleSearchSelect = useCallback((countryId: number) => {
     const country = countries.find((c) => c.id === countryId);
