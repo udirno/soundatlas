@@ -1,44 +1,79 @@
 # SoundAtlas
 
-Music geography intelligence platform. Upload your Spotify library and see where your music actually comes from — artist origins plotted on a world map, colored by top genre per country, with stats on geographic diversity, top genres, and per-country breakdowns.
+Music geography intelligence platform. The pipeline reads your Spotify liked-tracks export, resolves each artist to a country of origin, and plots them on a world map colored by top genre. Ask a built-in AI chat questions about your listening geography.
 
-**Live:** [soundatlas-pi.vercel.app](https://soundatlas-pi.vercel.app)
+**Live:** [soundatlas-pi.vercel.app](https://soundatlas-pi.vercel.app) (loaded with my own library)
 
 ## Stack
 
 - **Frontend** — Next.js (App Router) + TypeScript + Mapbox GL + Tailwind
-- **Backend** — FastAPI + SQLAlchemy (async) + PostgreSQL + Redis
-- **Pipeline** — Spotify API + MusicBrainz (for artist → country resolution)
+- **Backend** — FastAPI + async SQLAlchemy + PostgreSQL + Redis
+- **Pipeline** — Python + Spotify API + MusicBrainz
 - **AI Chat** — Anthropic Claude API
 - **Deploy** — Vercel (frontend) + Railway (backend, Postgres, Redis)
 
-## Local development
+## How it works
 
-```bash
-cp .env.example .env   # fill in SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, ANTHROPIC_API_KEY, NEXT_PUBLIC_MAPBOX_TOKEN
-docker compose up -d
-cd frontend && npm install && npm run dev
+```
+  YourLibrary.json (Spotify export)
+           │
+           ▼
+   pipeline scripts ─────────▶ Postgres ◀───── FastAPI (:8000)
+           │                                         ▲
+           ├─▶ Spotify API     (genres, images)      │
+           └─▶ MusicBrainz     (country of origin)   │
+                                                     │
+                                 Next.js (:3000) ────┘
+                                       │
+                                       ├─▶ Mapbox GL     (map render)
+                                       └─▶ Claude API    (AI chat)
 ```
 
-- Frontend: http://localhost:3000
-- Backend: http://localhost:8000/docs
+## Prerequisites
 
-## Getting your Spotify data
+You need Docker + Docker Compose, plus four credentials:
 
-The pipeline runs against your personal Spotify streaming history. To get the file:
+| Credential | Where to get it |
+|---|---|
+| `SPOTIFY_CLIENT_ID` + `SPOTIFY_CLIENT_SECRET` | [developer.spotify.com/dashboard](https://developer.spotify.com/dashboard) → create an app |
+| `NEXT_PUBLIC_MAPBOX_TOKEN` | [account.mapbox.com/access-tokens](https://account.mapbox.com/access-tokens) → default public token (starts with `pk.`) |
+| `ANTHROPIC_API_KEY` | [console.anthropic.com/settings/keys](https://console.anthropic.com/settings/keys) |
+
+And your Spotify library export:
 
 1. Go to [spotify.com/account/privacy](https://www.spotify.com/account/privacy)
-2. Under **Download your data**, request **Extended streaming history** (not the basic one)
-3. Wait — Spotify emails a download link in up to ~30 days (usually a few days)
-4. Unzip. You'll get files like `Streaming_History_Audio_*.json`
+2. Request **Account data** (the default — *not* Extended streaming history)
+3. Spotify emails the download in ~5 days
+4. Unzip to `~/Downloads/Spotify Account Data/YourLibrary.json` (or anywhere — you can point the pipeline at a custom path)
 
-## Pipeline
-
-Point `run_pipeline.py` at one of the JSON files from the export:
+## Quickstart
 
 ```bash
+# 1. Configure credentials
+cp .env.example .env
+# Edit .env and fill in the four values above
+
+# 2. Start all services (Postgres, Redis, backend, frontend)
+docker compose up -d
+
+# 3. Seed the database from your Spotify export
 cd pipeline
-python run_pipeline.py path/to/Streaming_History_Audio_2024.json
+pip install -r requirements.txt
+python run_pipeline.py
 ```
 
-The pipeline parses the history, resolves each artist to a country of origin via MusicBrainz, enriches genre and image data via the Spotify API, and writes everything to Postgres.
+Then open [http://localhost:3000](http://localhost:3000).
+
+The pipeline takes ~50 min for a few thousand artists — MusicBrainz rate-limits country lookups to 1 req/sec.
+
+## Pipeline flags
+
+```bash
+python run_pipeline.py --export-path /custom/path/YourLibrary.json   # non-default export location
+python run_pipeline.py --skip-musicbrainz                            # fast dry run, no country resolution
+python run_pipeline.py --stats-only                                  # print current DB stats, no API calls
+```
+
+## Running into issues?
+
+See [TROUBLESHOOTING.md](TROUBLESHOOTING.md).
