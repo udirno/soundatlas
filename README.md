@@ -23,9 +23,22 @@ cd frontend && npm install && npm run dev
 - Frontend: http://localhost:3000
 - Backend: http://localhost:8000/docs
 
+## Getting your Spotify data
+
+The pipeline runs against your personal Spotify streaming history. To get the file:
+
+1. Go to [spotify.com/account/privacy](https://www.spotify.com/account/privacy)
+2. Under **Download your data**, request **Extended streaming history** (not the basic one)
+3. Wait — Spotify emails a download link in up to ~30 days (usually a few days)
+4. Unzip. You'll get files like `Streaming_History_Audio_*.json`
+
 ## Pipeline
+
+Point `run_pipeline.py` at one of the JSON files from the export:
 
 ```bash
 cd pipeline
-python run_pipeline.py path/to/your/spotify/StreamingHistory.json
+python run_pipeline.py path/to/Streaming_History_Audio_2024.json
 ```
+
+The pipeline parses the history, resolves each artist to a country of origin via MusicBrainz, enriches genre and image data via the Spotify API, and writes everything to Postgres.
